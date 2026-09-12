@@ -2,7 +2,7 @@
 
 ## Status
 
-Proposed on branch `migration/beta25-plugin-content`.
+Implemented and statically verified on branch `migration/beta25-plugin-content`. In-game verification remains blocked until a complete deployable mod containing `IntelEngine.esp` and compiled PEX assets is available; the local native build produced only `IntelEngine.dll`.
 
 ## Objective
 
