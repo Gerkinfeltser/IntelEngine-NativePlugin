@@ -152,6 +152,59 @@ Required fields:
 
 For an external-only mod package, omit legacy `files[]`. Before any Hub submission, generate and review the action-plugin `invocation` metadata required by the Hub validator; do not invent it merely to satisfy local external discovery.
 
+## Delegation plan for Luna subagents
+
+Use Luna for bounded, mechanically verifiable slices. The coordinator retains decisions, integrates the slices, and runs validation once. Subagents must not commit, push, deploy, launch Skyrim, or run project-wide builds/tests; those shared operations happen after all edits are integrated.
+
+### Shared contract for every delegated slice
+
+- External identity is `galanx.intelengine`.
+- SkyrimNet compatibility target is `0.25.0`.
+- Preserve all 11 existing in-file action names and all three `customCategory` values.
+- Preserve `config/plugins/IntelEngine/**` and every runtime consumer of `Plugin_IntelEngine`.
+- Do not edit player-managed registry, library, overlay, save, `settings.yaml`, or `factions.yaml` state.
+- Do not add compatibility copies or deprecated-path fallbacks.
+- Each Luna reports exact files changed, commands it ran, converter warnings, and unresolved assumptions.
+
+### Wave A — parallel independent slices
+
+| Luna assignment | Exclusive ownership | Deliverable |
+|---|---|---|
+| Content conversion | `SKSE/Plugins/SkyrimNet/external/galanx.intelengine/**` and removal of the 25 corresponding loose action/prompt files | Reproducible converter input description, successful converter report, checked-in external tree, and an exact old→new path map |
+| Build and verification migration | `build.ps1`, `verify.ps1` | Repository-relative source handling, explicit Data/deploy paths, external-tree staging and verification, known-file legacy cleanup, and no automatic Git operation during validation |
+| Dashboard native path migration | `SKSE/src/DashboardUIManager.cpp` | Both action enumeration and toggle-write paths use the external bundle; plugin-config and global character-bio paths remain untouched |
+
+These slices may run concurrently because their file ownership does not overlap. The coordinator provides the shared contract in each assignment rather than asking subagents to rediscover scope.
+
+### Coordinator integration gate
+
+After Wave A, the coordinator:
+
+1. Reviews the converter report and exact path map.
+2. Searches for remaining IntelEngine-owned loose action/prompt paths and accidental action-name changes.
+3. Confirms `config/plugins/IntelEngine/**` and unrelated global SkyrimNet prompt paths were not moved.
+4. Resolves cross-slice path constants and build-script assumptions.
+5. Runs the converter-parity comparison, DLL build, dashboard build, staging, and static/package verification once.
+
+No Luna should validate mid-flight: project-wide commands would race sibling edits and waste quota by repeating the same work.
+
+### Wave B — delegate only after integration is stable
+
+| Luna assignment | Exclusive ownership | Deliverable |
+|---|---|---|
+| Current documentation update | `README.md` and any explicitly identified current release-facing document, excluding historical plans | Beta 25 requirement, external bundle path/id, preserved action identities, configuration-path distinction, and upgrade guidance |
+| Archive inspection | Read-only inspection of the final staged package/archive | File inventory proving one external bundle, 14 action YAMLs, 11 prompts, no loose duplicates, and no user/generated state |
+| Log triage | Read-only review of SkyrimNet and IntelEngine logs after the coordinator runs the game | Evidence table for discovery, registrations, prompt failures, old-path errors, duplicate actions, and native exceptions |
+
+The coordinator then performs the actual in-game actions, dashboard toggle, settings persistence check, final diff review, commit, and any push requested by the user. These are integration-sensitive or user-session operations and should not be delegated.
+
+### Quota discipline
+
+- Prefer one Luna per Wave A ownership slice; do not create agents for single searches or one-line edits.
+- Pass file paths, invariants, and acceptance criteria in the initial assignment so Luna does not spend quota reconstructing the migration.
+- Reuse a Luna only for corrections within its owned slice. Do not ask every Luna to review the entire repository.
+- Keep build, converter parity, package inspection, and runtime verification centralized unless a read-only archive/log review is explicitly delegated.
+
 ## Implementation plan
 
 ### Phase 1 — Freeze and record the baseline
