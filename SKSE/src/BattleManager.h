@@ -255,6 +255,9 @@ namespace IntelEngine {
 
         /** Force cleanup ALL battle soldiers (hard timeout). Disables+deletes all tracked actors. */
         void ForceCleanupAllSoldiers();
+        /** Drop the list of soldiers left to clean up, without touching them: the script removes them itself
+         *  at the end of a battle, where it can tell which ones the player is looking at. */
+        void ForgetBattleSoldiers();
 
         /** Remove crime factions from battle soldiers (no bounty for kills). Called at spawn. */
         void SnapshotBounties();
@@ -317,8 +320,8 @@ namespace IntelEngine {
             bool playerParticipated = false;  // true if player joined at any point (survives side changes)
             int playerKillsA = 0;            // soldiers from factionA killed by player
             int playerKillsB = 0;            // soldiers from factionB killed by player
+            nlohmann::json physicalPosition = nullptr;
         };
-
         /** Spawn soldiers for one faction side. Shared by ExecuteFullBattleSpawn and SpawnReinforcements. */
         std::vector<RE::Actor*> SpawnSoldiersForFaction(
             const std::string& factionId, RE::TESFaction* battleFaction,

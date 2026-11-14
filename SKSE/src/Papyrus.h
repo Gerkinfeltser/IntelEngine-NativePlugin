@@ -7,6 +7,8 @@
  */
 
 #include "Plugin.h"
+#include <nlohmann/json.hpp>
+#include "StoryLoadRecovery.h"
 
 namespace IntelEngine::Papyrus {
 
@@ -16,6 +18,15 @@ namespace IntelEngine::Papyrus {
      * Register all Papyrus native functions with the VM.
      */
     bool Register(RE::BSScript::IVirtualMachine* a_vm);
+
+    /**
+     * The NPC or leveled NPC list a name stands for, the way every spawn looks it up: the game's editor ids, an
+     * enumeration by editor id, prefix matches (a Requiem-style setup replaces "LvlBanditMelee..." lists by
+     * variants of that name), and the form ids of the stock lists in Skyrim.esm. nullptr when nothing fits;
+     * results are cached, misses too.
+     */
+    RE::TESBoundObject* LookupLeveledActor(const char* editorID);
+    nlohmann::json PollAndSyncPE();
 
     // ==========================================================================
     // NPC Search Functions
@@ -425,6 +436,10 @@ namespace IntelEngine::Papyrus {
 
     /** Build full political context JSON for the Political DM prompt. */
     RE::BSFixedString BuildPoliticalContext(RE::StaticFunctionTag*, float currentGameTime);
+
+    /** Read-only pipe-2 JSON feeds, including identity and readiness metadata. */
+    RE::BSFixedString GetPoliticalEventsAfter(RE::StaticFunctionTag*, int afterId, int limit);
+    RE::BSFixedString GetFactionsJson(RE::StaticFunctionTag*);
 
     /** Build compact political dashboard JSON for PrismaUI. */
     RE::BSFixedString BuildPoliticalDashboardJson(RE::StaticFunctionTag*);
