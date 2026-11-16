@@ -1,0 +1,25 @@
+FormKey: 00088B:IntelEngine-SoldierPack.esp
+VersionControl: 944407
+EditorID: IESoldier_LItemCompCuirassLight
+FormVersion: 40
+Version2: 8
+Flags:
+- CalculateFromAllLevelsLessThanOrEqualPlayer
+- CalculateForEachItemInCount
+Entries:
+- Data:
+    Level: 1
+    Reference: 013911:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 013911:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 03619E:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 01B3A3:Skyrim.esm
+    Count: 1

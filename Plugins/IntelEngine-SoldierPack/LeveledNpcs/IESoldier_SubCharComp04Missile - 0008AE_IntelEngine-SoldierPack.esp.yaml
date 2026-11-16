@@ -1,0 +1,41 @@
+FormKey: 0008AE:IntelEngine-SoldierPack.esp
+VersionControl: 944407
+EditorID: IESoldier_SubCharComp04Missile
+FormVersion: 40
+Version2: 7
+Flags:
+- CalculateFromAllLevelsLessThanOrEqualPlayer
+- CalculateForEachItemInCount
+Entries:
+- Data:
+    Level: 1
+    Reference: 0008AB:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008AB:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008AB:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008AA:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008AA:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008AA:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008AD:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008AC:IntelEngine-SoldierPack.esp
+    Count: 1

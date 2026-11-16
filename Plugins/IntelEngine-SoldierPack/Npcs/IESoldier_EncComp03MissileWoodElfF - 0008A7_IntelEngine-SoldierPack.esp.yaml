@@ -1,0 +1,226 @@
+FormKey: 0008A7:IntelEngine-SoldierPack.esp
+IsCompressed: True
+MajorRecordFlagsRaw: 262144
+VersionControl: 1978415
+EditorID: IESoldier_EncComp03MissileWoodElfF
+Version2: 4
+SkyrimMajorRecordFlags:
+- Compressed
+ObjectBounds:
+  First: -22, -14, 0
+  Second: 22, 14, 128
+Configuration:
+  Flags:
+  - Female
+  - Respawn
+  - AutoCalcStats
+  - LoopedScript
+  - LoopedAudio
+  MagickaOffset: -25
+  StaminaOffset: 25
+  Level:
+    MutagenObjectType: NpcLevel
+    Level: 9
+  SpeedMultiplier: 100
+  DispositionBase: 35
+  TemplateFlags:
+  - Traits
+  - Factions
+  - SpellList
+  - AIPackages
+  - ModelAnimation
+  - BaseData
+  - Script
+  - DefPackList
+  - AttackData
+  HealthOffset: 100
+Factions:
+- Faction: 048362:Skyrim.esm
+  Fluff: 0x000000
+DeathItem: 0C3C9B:Skyrim.esm
+Voice: 013ADD:Skyrim.esm
+Template: 000878:IntelEngine-SoldierPack.esp
+Race: 013749:Skyrim.esm
+Perks:
+- Perk: 103A8F:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 105F1C:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 051B1B:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+Items:
+- Item:
+    Item: 000899:IntelEngine-SoldierPack.esp
+    Count: 1
+- Item:
+    Item: 017177:Skyrim.esm
+    Count: 1
+- Item:
+    Item: 04F78D:Skyrim.esm
+    Count: 1
+- Item:
+    Item: 08777F:Skyrim.esm
+    Count: 1
+- Item:
+    Item: 10E0DD:Skyrim.esm
+    Count: 1
+AIData:
+  Aggression: VeryAggressive
+  Confidence: Foolhardy
+  EnergyLevel: 50
+  Assistance: HelpsFriendsAndAllies
+Class: 015BE7:Skyrim.esm
+Name:
+  TargetLanguage: English
+  Value: ''
+PlayerSkills:
+  SkillValues:
+  - Key: OneHanded
+    Value: 31
+  - Key: TwoHanded
+    Value: 25
+  - Key: Archery
+    Value: 32
+  - Key: Block
+    Value: 26
+  - Key: Smithing
+    Value: 20
+  - Key: HeavyArmor
+    Value: 21
+  - Key: LightArmor
+    Value: 32
+  - Key: Pickpocket
+    Value: 15
+  - Key: Lockpicking
+    Value: 15
+  - Key: Sneak
+    Value: 27
+  - Key: Alchemy
+    Value: 15
+  - Key: Speech
+    Value: 20
+  - Key: Alteration
+    Value: 15
+  - Key: Conjuration
+    Value: 15
+  - Key: Destruction
+    Value: 15
+  - Key: Illusion
+    Value: 15
+  - Key: Restoration
+    Value: 15
+  - Key: Enchanting
+    Value: 15
+  SkillOffsets:
+  - Key: OneHanded
+    Value: 0
+  - Key: TwoHanded
+    Value: 0
+  - Key: Archery
+    Value: 0
+  - Key: Block
+    Value: 0
+  - Key: Smithing
+    Value: 0
+  - Key: HeavyArmor
+    Value: 0
+  - Key: LightArmor
+    Value: 0
+  - Key: Pickpocket
+    Value: 0
+  - Key: Lockpicking
+    Value: 0
+  - Key: Sneak
+    Value: 0
+  - Key: Alchemy
+    Value: 0
+  - Key: Speech
+    Value: 0
+  - Key: Alteration
+    Value: 0
+  - Key: Conjuration
+    Value: 0
+  - Key: Destruction
+    Value: 0
+  - Key: Illusion
+    Value: 0
+  - Key: Restoration
+    Value: 0
+  - Key: Enchanting
+    Value: 0
+  Health: 238
+  Magicka: 25
+  Stamina: 107
+  GearedUpWeapons: 1
+HeadParts:
+- 08555F:Skyrim.esm
+- 0C716D:Skyrim.esm
+- 0E7AEC:Skyrim.esm
+- 0F5009:Skyrim.esm
+- 05140A:Skyrim.esm
+- 08555F:Skyrim.esm
+HairColor: 0A0434:Skyrim.esm
+CombatStyle: 03BE1D:Skyrim.esm
+NAM5: 255
+Height: 1
+Weight: 65
+SoundLevel: Normal
+DefaultOutfit: 000890:IntelEngine-SoldierPack.esp
+DefaultPackageList: 021E81:Skyrim.esm
+HeadTexture: 073259:Skyrim.esm
+TextureLighting: '#00C6B0A8'
+FaceMorph:
+  NoseLongVsShort: -0.24
+  NoseUpVsDown: -0.4
+  JawUpVsDown: -0.7
+  JawNarrowVsWide: -1
+  JawForwardVsBack: 0.84
+  CheeksUpVsDown: 1
+  CheeksForwardVsBack: 0.6
+  EyesUpVsDown: -0.5
+  EyesInVsOut: 0.14
+  BrowsUpVsDown: -0.8
+  BrowsInVsOut: -1
+  BrowsForwardVsBack: -1
+  LipsUpVsDown: 0.36
+  LipsInVsOut: 0.36
+  ChinNarrowVsWide: -0.54
+  ChinUpVsDown: -0.3
+  ChinUnderbiteVsOverbite: -0.62
+  EyesForwardVsBack: -0.74
+  Unknown: 3.4028235E+38
+FaceParts:
+  Nose: 13
+  Unknown: 4294967295
+  Eyes: 13
+  Mouth: 5
+TintLayers:
+- Index: 1
+  Color: '#00C6B0A8'
+  InterpolationValue: 1
+  Preset: 75
+- Index: 2
+  Color: '#00000000'
+  InterpolationValue: 1
+  Preset: 91
+- Index: 3
+  Color: '#000F0440'
+  InterpolationValue: 0.39
+  Preset: 98
+- Index: 5
+  Color: '#00500901'
+  InterpolationValue: 0.5
+  Preset: 104
+- Index: 7
+  Color: '#00A95452'
+  InterpolationValue: 0.38
+  Preset: 116
+- Index: 8
+  Color: '#00A95452'
+  InterpolationValue: 0.19
+  Preset: 120
+MajorFlags:
+- 0x40000

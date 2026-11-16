@@ -1,0 +1,26 @@
+FormKey: 000892:IntelEngine-SoldierPack.esp
+VersionControl: 944407
+EditorID: IESoldier_LItemCompHelmetLight
+FormVersion: 40
+Version2: 7
+ChanceNone: 0.75
+Flags:
+- CalculateFromAllLevelsLessThanOrEqualPlayer
+- CalculateForEachItemInCount
+Entries:
+- Data:
+    Level: 1
+    Reference: 013913:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 013913:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 013922:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 01B3A1:Skyrim.esm
+    Count: 1

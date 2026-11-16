@@ -1,0 +1,271 @@
+FormKey: 0008B5:IntelEngine-SoldierPack.esp
+IsCompressed: True
+MajorRecordFlagsRaw: 262144
+VersionControl: 1978415
+EditorID: IESoldier_EncComp06MissileNordM
+SkyrimMajorRecordFlags:
+- Compressed
+ObjectBounds:
+  First: -22, -14, 0
+  Second: 22, 14, 128
+Configuration:
+  Flags:
+  - Respawn
+  - AutoCalcStats
+  - LoopedScript
+  - LoopedAudio
+  MagickaOffset: -25
+  StaminaOffset: 100
+  Level:
+    MutagenObjectType: NpcLevel
+    Level: 25
+  SpeedMultiplier: 100
+  DispositionBase: 35
+  TemplateFlags:
+  - Traits
+  - Factions
+  - SpellList
+  - AIPackages
+  - ModelAnimation
+  - BaseData
+  - Script
+  - DefPackList
+  - AttackData
+  HealthOffset: 175
+Factions:
+- Faction: 048362:Skyrim.esm
+  Fluff: 0x000000
+DeathItem: 0C3C9B:Skyrim.esm
+Voice: 013AE6:Skyrim.esm
+Template: 000849:IntelEngine-SoldierPack.esp
+Race: 013746:Skyrim.esm
+Perks:
+- Perk: 058F62:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 103A90:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 105F1E:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 058F63:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 052D50:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 05F56F:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 05F592:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 03FFFA:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+- Perk: 051B1B:Skyrim.esm
+  Rank: 1
+  Fluff: 0x000000
+Items:
+- Item:
+    Item: 000899:IntelEngine-SoldierPack.esp
+    Count: 1
+- Item:
+    Item: 017177:Skyrim.esm
+    Count: 1
+- Item:
+    Item: 037C27:Skyrim.esm
+    Count: 1
+- Item:
+    Item: 04F78D:Skyrim.esm
+    Count: 1
+- Item:
+    Item: 08777F:Skyrim.esm
+    Count: 1
+- Item:
+    Item: 08FFFB:Skyrim.esm
+    Count: 1
+- Item:
+    Item: 10E0DD:Skyrim.esm
+    Count: 1
+AIData:
+  Aggression: VeryAggressive
+  Confidence: Brave
+  EnergyLevel: 50
+  Assistance: HelpsFriendsAndAllies
+Class: 015BE7:Skyrim.esm
+Name:
+  TargetLanguage: English
+  Value: ''
+PlayerSkills:
+  SkillValues:
+  - Key: OneHanded
+    Value: 55
+  - Key: TwoHanded
+    Value: 25
+  - Key: Archery
+    Value: 67
+  - Key: Block
+    Value: 37
+  - Key: Smithing
+    Value: 20
+  - Key: HeavyArmor
+    Value: 33
+  - Key: LightArmor
+    Value: 55
+  - Key: Pickpocket
+    Value: 15
+  - Key: Lockpicking
+    Value: 15
+  - Key: Sneak
+    Value: 50
+  - Key: Alchemy
+    Value: 15
+  - Key: Speech
+    Value: 20
+  - Key: Alteration
+    Value: 15
+  - Key: Conjuration
+    Value: 15
+  - Key: Destruction
+    Value: 15
+  - Key: Illusion
+    Value: 15
+  - Key: Restoration
+    Value: 15
+  - Key: Enchanting
+    Value: 15
+  SkillOffsets:
+  - Key: OneHanded
+    Value: 0
+  - Key: TwoHanded
+    Value: 0
+  - Key: Archery
+    Value: 0
+  - Key: Block
+    Value: 0
+  - Key: Smithing
+    Value: 0
+  - Key: HeavyArmor
+    Value: 0
+  - Key: LightArmor
+    Value: 0
+  - Key: Pickpocket
+    Value: 0
+  - Key: Lockpicking
+    Value: 0
+  - Key: Sneak
+    Value: 0
+  - Key: Alchemy
+    Value: 0
+  - Key: Speech
+    Value: 0
+  - Key: Alteration
+    Value: 0
+  - Key: Conjuration
+    Value: 0
+  - Key: Destruction
+    Value: 0
+  - Key: Illusion
+    Value: 0
+  - Key: Restoration
+    Value: 0
+  - Key: Enchanting
+    Value: 0
+  Health: 489
+  Magicka: 25
+  Stamina: 246
+  GearedUpWeapons: 1
+HeadParts:
+- 08555F:Skyrim.esm
+- 0F203C:Skyrim.esm
+- 0E7AED:Skyrim.esm
+- 0C3CDA:Skyrim.esm
+- 0DFC00:Skyrim.esm
+- 08555F:Skyrim.esm
+HairColor: 0F7565:Skyrim.esm
+CombatStyle: 03BE1D:Skyrim.esm
+NAM5: 255
+Height: 1
+Weight: 5
+SoundLevel: Normal
+DefaultOutfit: 000890:IntelEngine-SoldierPack.esp
+DefaultPackageList: 021E81:Skyrim.esm
+HeadTexture: 0D071E:Skyrim.esm
+TextureLighting: '#00826D5B'
+FaceMorph:
+  NoseLongVsShort: -0.6
+  NoseUpVsDown: 0.6
+  JawNarrowVsWide: -1
+  JawForwardVsBack: -0.16
+  CheeksUpVsDown: 0.7
+  CheeksForwardVsBack: 0.9
+  EyesUpVsDown: -0.1
+  EyesInVsOut: -0.36
+  BrowsUpVsDown: -0.7
+  BrowsInVsOut: -0.9
+  BrowsForwardVsBack: -0.8
+  LipsUpVsDown: 0.96
+  LipsInVsOut: -0.34
+  ChinNarrowVsWide: -0.8
+  ChinUpVsDown: -0.5
+  ChinUnderbiteVsOverbite: 0.48
+  EyesForwardVsBack: -0.14
+  Unknown: 3.4028235E+38
+FaceParts:
+  Nose: 10
+  Unknown: 4294967295
+  Eyes: 17
+  Mouth: 10
+TintLayers:
+- Index: 1
+  Color: '#00826D5B'
+  InterpolationValue: 1
+  Preset: 78
+- Index: 2
+  Color: '#00212B52'
+  InterpolationValue: 0.35
+  Preset: 89
+- Index: 3
+  Color: '#000F0440'
+  InterpolationValue: 0.39
+  Preset: 98
+- Index: 5
+  Color: '#00212B52'
+  InterpolationValue: 0.35
+  Preset: 105
+- Index: 6
+  Color: '#00000000'
+  InterpolationValue: 1
+  Preset: 113
+- Index: 7
+  Color: '#00430401'
+  InterpolationValue: 0.42
+  Preset: 117
+- Index: 8
+  Color: '#00A95452'
+  InterpolationValue: 0.19
+  Preset: 120
+- Index: 10
+  Color: '#00430401'
+  InterpolationValue: 0.42
+  Preset: 135
+- Index: 11
+  Color: '#002F2013'
+  InterpolationValue: 1
+  Preset: 141
+- Index: 12
+  Color: '#00430401'
+  InterpolationValue: 0.42
+  Preset: 143
+- Index: 19
+  Color: '#00000000'
+  InterpolationValue: 0.58
+  Preset: 583
+- Index: 25
+  Color: '#00000000'
+  InterpolationValue: 0
+  Preset: 587
+MajorFlags:
+- 0x40000

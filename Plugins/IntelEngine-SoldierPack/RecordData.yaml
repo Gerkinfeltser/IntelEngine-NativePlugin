@@ -1,0 +1,11 @@
+SpriggitSource:
+  PackageName: Spriggit.Yaml.Skyrim
+  Version: 0.40
+ModKey: IntelEngine-SoldierPack.esp
+GameRelease: SkyrimSE
+ModHeader:
+  Author: Gerkinfeltser
+  MasterReferences:
+  - Master: Skyrim.esm
+    FileSize: 0
+  INTV: 1

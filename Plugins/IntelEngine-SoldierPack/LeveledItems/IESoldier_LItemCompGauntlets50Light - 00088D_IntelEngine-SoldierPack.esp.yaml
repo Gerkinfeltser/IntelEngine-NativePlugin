@@ -1,0 +1,14 @@
+FormKey: 00088D:IntelEngine-SoldierPack.esp
+VersionControl: 944407
+EditorID: IESoldier_LItemCompGauntlets50Light
+FormVersion: 40
+Version2: 7
+ChanceNone: 0.5
+Flags:
+- CalculateFromAllLevelsLessThanOrEqualPlayer
+- CalculateForEachItemInCount
+Entries:
+- Data:
+    Level: 1
+    Reference: 013912:Skyrim.esm
+    Count: 1

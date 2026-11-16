@@ -1,0 +1,33 @@
+FormKey: 000801:IntelEngine-SoldierPack.esp
+VersionControl: 944407
+EditorID: IESoldier_LCharCompMelee2H
+FormVersion: 40
+Version2: 6
+Flags:
+- CalculateFromAllLevelsLessThanOrEqualPlayer
+- CalculateForEachItemInCount
+Entries:
+- Data:
+    Level: 1
+    Reference: 000804:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 5
+    Reference: 000806:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 9
+    Reference: 000808:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 14
+    Reference: 00080A:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 19
+    Reference: 00080C:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 25
+    Reference: 00080E:IntelEngine-SoldierPack.esp
+    Count: 1

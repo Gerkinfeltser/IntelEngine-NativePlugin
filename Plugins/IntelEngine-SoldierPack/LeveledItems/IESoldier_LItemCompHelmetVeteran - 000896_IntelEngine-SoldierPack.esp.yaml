@@ -1,0 +1,30 @@
+FormKey: 000896:IntelEngine-SoldierPack.esp
+VersionControl: 944407
+EditorID: IESoldier_LItemCompHelmetVeteran
+FormVersion: 40
+Version2: 7
+ChanceNone: 0.75
+Flags:
+- CalculateFromAllLevelsLessThanOrEqualPlayer
+- CalculateForEachItemInCount
+Entries:
+- Data:
+    Level: 1
+    Reference: 04C3D0:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 04C3D0:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 04C3D0:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 04C3D0:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 013954:Skyrim.esm
+    Count: 1

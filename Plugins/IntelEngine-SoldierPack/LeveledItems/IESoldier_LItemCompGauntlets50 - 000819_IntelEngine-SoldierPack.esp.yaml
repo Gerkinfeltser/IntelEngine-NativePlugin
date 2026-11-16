@@ -1,0 +1,30 @@
+FormKey: 000819:IntelEngine-SoldierPack.esp
+VersionControl: 944407
+EditorID: IESoldier_LItemCompGauntlets50
+FormVersion: 40
+Version2: 7
+ChanceNone: 0.5
+Flags:
+- CalculateFromAllLevelsLessThanOrEqualPlayer
+- CalculateForEachItemInCount
+Entries:
+- Data:
+    Level: 1
+    Reference: 0CEE7E:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0CEE7E:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0F6F27:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 056B17:Skyrim.esm
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 013912:Skyrim.esm
+    Count: 1

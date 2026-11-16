@@ -1,0 +1,11 @@
+FormKey: 00088F:IntelEngine-SoldierPack.esp
+VersionControl: 2818328
+EditorID: IESoldier_CompArmorMeleeShield20OutfitLight
+FormVersion: 31
+Version2: 1
+Items:
+- 00088C:IntelEngine-SoldierPack.esp
+- 00088B:IntelEngine-SoldierPack.esp
+- 00088D:IntelEngine-SoldierPack.esp
+- 00088E:IntelEngine-SoldierPack.esp
+- 000892:IntelEngine-SoldierPack.esp
