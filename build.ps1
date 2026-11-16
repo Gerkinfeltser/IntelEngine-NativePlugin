@@ -20,7 +20,8 @@ param(
     [string]$ToolkitRoot,
     [string]$TestDest,
     [string]$VanillaDest,
-    [string]$CKDest
+    [string]$CKDest,
+    [string]$SpriggitCli
 )
 $ErrorActionPreference = "Stop"
 # Dashboard-only builds are isolated from Papyrus, deployment targets, and publishing.
@@ -32,7 +33,7 @@ if ($DashboardOnly) {
 $localDefaultsPath = Join-Path $PSScriptRoot "build.local.psd1"
 if (Test-Path -LiteralPath $localDefaultsPath) {
     $localDefaults = Import-PowerShellDataFile -LiteralPath $localDefaultsPath
-    foreach ($name in @("DataDir", "ToolkitRoot", "TestDest", "VanillaDest", "CKDest")) {
+    foreach ($name in @("DataDir", "ToolkitRoot", "TestDest", "VanillaDest", "CKDest", "SpriggitCli")) {
         if (-not $PSBoundParameters.ContainsKey($name) -and $localDefaults.ContainsKey($name)) {
             Set-Variable -Name $name -Value $localDefaults[$name]
         }
@@ -386,6 +387,21 @@ Get-ChildItem -Path (Join-Path $SourceDir "IntelEngine*.psc") | ForEach-Object {
 }
 Write-Host "  Source scripts synced to Data"
 
+# Plugins\<name>\ holds a plugin's Spriggit YAML source; build it into Data\<ModKey>.
+$spriggitDirs = @(
+    Get-ChildItem -LiteralPath (Join-Path $RepoRoot "Plugins") -Directory -ErrorAction SilentlyContinue |
+        Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName "spriggit-meta.json") -PathType Leaf }
+)
+if ($spriggitDirs.Count -gt 0 -and [string]::IsNullOrWhiteSpace($SpriggitCli)) {
+    throw "Supply -SpriggitCli (path to Spriggit.CLI.exe) or set SpriggitCli in build.local.psd1."
+}
+foreach ($dir in $spriggitDirs) {
+    $meta = Get-Content -LiteralPath (Join-Path $dir.FullName "spriggit-meta.json") -Raw | ConvertFrom-Json
+    & $SpriggitCli deserialize -i $dir.FullName -o (Join-Path $DataDir $meta.ModKey) -p $meta.PackageName -v $meta.Version | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "Spriggit deserialize failed for Plugins\$($dir.Name) (exit $LASTEXITCODE)" }
+    Write-Host "  $($meta.ModKey) built from Plugins\$($dir.Name)"
+}
+
 # =============================================================================
 # Step 4: Deploy Data without mirroring shared roots (unless -SkipDeploy)
 # =============================================================================
@@ -407,6 +423,7 @@ $verifyArgs = @{
     VanillaDest = $VanillaDest
     CKDest = $CKDest
     SkipDeployTargets = $SkipDeploy.IsPresent
+    SpriggitCli = $SpriggitCli
 }
 & (Join-Path $RepoRoot "verify.ps1") @verifyArgs
 if ($LASTEXITCODE -ne 0) {

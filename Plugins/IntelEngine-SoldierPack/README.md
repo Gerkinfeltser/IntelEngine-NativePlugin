@@ -2,7 +2,9 @@
 
 This YAML is the source of `IntelEngine-SoldierPack.esp`. The `.esp` is built from it, so edit the YAML (or the CK, then serialize back), never only the `.esp`.
 
-Spriggit CLI 0.40.0, `Spriggit.Yaml.Skyrim`:
+`build.ps1` builds it into `<DataDir>\IntelEngine-SoldierPack.esp`, and `verify.ps1` rebuilds it to a temp file and checks the staged copy by hash. Both need `SpriggitCli` (path to `Spriggit.CLI.exe`) as a parameter or in `build.local.psd1`.
+
+By hand, Spriggit CLI 0.40.0, `Spriggit.Yaml.Skyrim`:
 
 ```powershell
 # YAML -> esp

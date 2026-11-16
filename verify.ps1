@@ -15,13 +15,18 @@ param(
     [string]$DataDir = (Join-Path (Split-Path -Parent $PSScriptRoot) "IntelEngine-GamePlugin"),
     [string]$TestDest,
     [string]$VanillaDest,
-    [string]$CKDest
+    [string]$CKDest,
+    [string]$SpriggitCli
 )
 
 $ErrorActionPreference = "Continue"
 $DataDir = [System.IO.Path]::GetFullPath($DataDir).TrimEnd([char[]]@('\', '/'))
 
 $RepoRoot = $PSScriptRoot
+$localDefaultsPath = Join-Path $RepoRoot "build.local.psd1"
+if (-not $PSBoundParameters.ContainsKey("SpriggitCli") -and (Test-Path -LiteralPath $localDefaultsPath)) {
+    $SpriggitCli = (Import-PowerShellDataFile -LiteralPath $localDefaultsPath)["SpriggitCli"]
+}
 $SKSEDir = Join-Path $RepoRoot "SKSE"
 $ExternalSource = Join-Path $SKSEDir "Plugins\SkyrimNet\external\galanx.intelengine"
 $ExternalData = Join-Path $DataDir "SKSE\Plugins\SkyrimNet\external\galanx.intelengine"
@@ -232,6 +237,37 @@ Compare-SourceTree `
     -SourceRoot $PluginConfigSource `
     -DataRoot $PluginConfigData `
     -ExcludedNames @("settings.yaml", "factions.yaml")
+
+# =============================================================================
+# Spriggit plugin sources (Plugins\<name>\) -> Data\<ModKey>: rebuilt to a temp file, compared by hash
+# =============================================================================
+Write-Host "`n=== Plugin Sources (Spriggit) ===" -ForegroundColor Cyan
+$spriggitDirs = @(
+    Get-ChildItem -LiteralPath (Join-Path $RepoRoot "Plugins") -Directory -ErrorAction SilentlyContinue |
+        Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName "spriggit-meta.json") -PathType Leaf }
+)
+foreach ($dir in $spriggitDirs) {
+    $meta = Get-Content -LiteralPath (Join-Path $dir.FullName "spriggit-meta.json") -Raw | ConvertFrom-Json
+    $label = "Plugin source -> Data: $($meta.ModKey)"
+    if ([string]::IsNullOrWhiteSpace($SpriggitCli)) {
+        $checked++
+        Add-Failure -Label $label -Message "CANNOT CHECK: $label (supply -SpriggitCli or set SpriggitCli in build.local.psd1)"
+        continue
+    }
+    $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) ("ie-verify-" + [guid]::NewGuid())
+    try {
+        $tempEsp = Join-Path $tempDir $meta.ModKey
+        & $SpriggitCli deserialize -i $dir.FullName -o $tempEsp -p $meta.PackageName -v $meta.Version | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            $checked++
+            Add-Failure -Label $label -Message "SPRIGGIT FAILED: $label (exit $LASTEXITCODE)"
+        } else {
+            Compare-File $label $tempEsp (Join-Path $DataDir $meta.ModKey) -UseHash
+        }
+    } finally {
+        Remove-Item -LiteralPath $tempDir -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
 
 # =============================================================================
 # Known retired loose files must be absent; shared roots remain untouched
