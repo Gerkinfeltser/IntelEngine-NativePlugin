@@ -68,3 +68,19 @@ Entries:
     Level: 1
     Reference: 000878:IntelEngine-SoldierPack.esp
     Count: 1
+- Data:
+    Level: 1
+    Reference: 0008BC:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008C2:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008C8:IntelEngine-SoldierPack.esp
+    Count: 1
+- Data:
+    Level: 1
+    Reference: 0008CE:IntelEngine-SoldierPack.esp
+    Count: 1
