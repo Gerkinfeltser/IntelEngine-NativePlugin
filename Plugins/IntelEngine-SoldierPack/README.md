@@ -2,7 +2,7 @@
 
 This YAML is the source of `IntelEngine-SoldierPack.esp`. The `.esp` is built from it, so edit the YAML (or the CK, then serialize back), never only the `.esp`.
 
-`build.ps1` builds it into `<DataDir>\IntelEngine-SoldierPack.esp`, and `verify.ps1` rebuilds it to a temp file and checks the staged copy by hash. Both need `SpriggitCli` (path to `Spriggit.CLI.exe`) as a parameter or in `build.local.psd1`.
+`build.ps1` builds it into `<DataDir>\Optional\IntelEngine-SoldierPack\`, with `factions.d/companions_soldiers.yaml` beside it in Data layout, and `verify.ps1` rebuilds the esp to a temp file and checks both staged files by hash. That folder is the installer's "Companions soldiers" option (`fomod/ModuleConfig.xml` in GamePlugin); `build.ps1` also installs it on the test targets. Both need `SpriggitCli` (path to `Spriggit.CLI.exe`) as a parameter or in `build.local.psd1`.
 
 By hand, Spriggit CLI 0.40.0, `Spriggit.Yaml.Skyrim`:
 
@@ -25,4 +25,5 @@ Spriggit.CLI serialize -i <path>/IntelEngine-SoldierPack.esp -o Plugins/IntelEng
 
 - Never renumber existing records: baked FaceGen is named by FormID.
 - New face: copy a 1H NPC of that tier, give it the next free FormID and a new editor ID, change only the face fields, add it to that tier's `IESoldier_SubCharComp0<tier>Melee1H` list, then bake FaceGen for that NPC.
+- No FaceGen is shipped: the installer option names Face Discoloration Fix (Nexus 42441), which builds the faces at run time (seen working in game 2026-11-18).
 - FaceGen (`meshes/.../facegeom/IntelEngine-SoldierPack.esp/*.nif`, `textures/.../facetint/IntelEngine-SoldierPack.esp/*.dds`) is binary and not part of this YAML.

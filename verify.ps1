@@ -239,7 +239,8 @@ Compare-SourceTree `
     -ExcludedNames @("settings.yaml", "factions.yaml")
 
 # =============================================================================
-# Spriggit plugin sources (Plugins\<name>\) -> Data\<ModKey>: rebuilt to a temp file, compared by hash
+# Spriggit plugin sources (Plugins\<name>\) -> Data\Optional\<name>\<ModKey>: rebuilt to a temp file, compared
+# by hash; the plugin's factions.d\*.yaml -> Data\Optional\<name>\SKSE\...\IntelEngine\factions.d
 # =============================================================================
 Write-Host "`n=== Plugin Sources (Spriggit) ===" -ForegroundColor Cyan
 $spriggitDirs = @(
@@ -249,6 +250,10 @@ $spriggitDirs = @(
 foreach ($dir in $spriggitDirs) {
     $meta = Get-Content -LiteralPath (Join-Path $dir.FullName "spriggit-meta.json") -Raw | ConvertFrom-Json
     $label = "Plugin source -> Data: $($meta.ModKey)"
+    $optionDir = Join-Path $DataDir "Optional\$($dir.Name)"
+    Get-ChildItem -Path (Join-Path $dir.FullName "factions.d\*.yaml") -ErrorAction SilentlyContinue | ForEach-Object {
+        Compare-File "Plugin factions.d -> Data: $($_.Name)" $_.FullName (Join-Path $optionDir "SKSE\Plugins\SkyrimNet\config\plugins\IntelEngine\factions.d\$($_.Name)") -UseHash
+    }
     if ([string]::IsNullOrWhiteSpace($SpriggitCli)) {
         $checked++
         Add-Failure -Label $label -Message "CANNOT CHECK: $label (supply -SpriggitCli or set SpriggitCli in build.local.psd1)"
@@ -262,7 +267,7 @@ foreach ($dir in $spriggitDirs) {
             $checked++
             Add-Failure -Label $label -Message "SPRIGGIT FAILED: $label (exit $LASTEXITCODE)"
         } else {
-            Compare-File $label $tempEsp (Join-Path $DataDir $meta.ModKey) -UseHash
+            Compare-File $label $tempEsp (Join-Path $optionDir $meta.ModKey) -UseHash
         }
     } finally {
         Remove-Item -LiteralPath $tempDir -Recurse -Force -ErrorAction SilentlyContinue

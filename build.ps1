@@ -169,6 +169,7 @@ function Deploy-Data {
         (Join-Path $DataDir "SKSE\Plugins\SkyrimNet\library"),
         (Join-Path $DataDir "SKSE\Plugins\SkyrimNet\overlay"),
         (Join-Path $DataDir "SKSE\Plugins\SkyrimNet\saves"),
+        (Join-Path $DataDir "Optional"),
         "/NFL",
         "/NDL",
         "/NJH",
@@ -180,6 +181,11 @@ function Deploy-Data {
     $robocopyExitCode = $LASTEXITCODE
     if ($robocopyExitCode -ge 8) {
         throw "robocopy to $Label failed with exit code $robocopyExitCode"
+    }
+    # Installer options (Data\Optional\<name>\, each in Data layout) are all installed on a test target.
+    Get-ChildItem -LiteralPath (Join-Path $DataDir "Optional") -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+        & robocopy $_.FullName $Destination /E /IS /IT /NFL /NDL /NJH /NJS /R:1 /W:1 | Out-Null
+        if ($LASTEXITCODE -ge 8) { throw "robocopy of option $($_.Name) to $Label failed with exit code $LASTEXITCODE" }
     }
 
     $removed = Remove-LegacyIntelEngineContent -DestinationRoot $Destination
@@ -387,7 +393,8 @@ Get-ChildItem -Path (Join-Path $SourceDir "IntelEngine*.psc") | ForEach-Object {
 }
 Write-Host "  Source scripts synced to Data"
 
-# Plugins\<name>\ holds a plugin's Spriggit YAML source; build it into Data\<ModKey>.
+# Plugins\<name>\ holds a plugin's Spriggit YAML source and is an installer option: build it into
+# Data\Optional\<name>\<ModKey>, with its factions.d\*.yaml beside it in Data layout (fomod\ModuleConfig.xml).
 $spriggitDirs = @(
     Get-ChildItem -LiteralPath (Join-Path $RepoRoot "Plugins") -Directory -ErrorAction SilentlyContinue |
         Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName "spriggit-meta.json") -PathType Leaf }
@@ -397,8 +404,16 @@ if ($spriggitDirs.Count -gt 0 -and [string]::IsNullOrWhiteSpace($SpriggitCli)) {
 }
 foreach ($dir in $spriggitDirs) {
     $meta = Get-Content -LiteralPath (Join-Path $dir.FullName "spriggit-meta.json") -Raw | ConvertFrom-Json
-    & $SpriggitCli deserialize -i $dir.FullName -o (Join-Path $DataDir $meta.ModKey) -p $meta.PackageName -v $meta.Version | Out-Null
+    $optionDir = Join-Path $DataDir "Optional\$($dir.Name)"
+    New-Item -ItemType Directory -Force -Path $optionDir | Out-Null
+    & $SpriggitCli deserialize -i $dir.FullName -o (Join-Path $optionDir $meta.ModKey) -p $meta.PackageName -v $meta.Version | Out-Null
     if ($LASTEXITCODE -ne 0) { throw "Spriggit deserialize failed for Plugins\$($dir.Name) (exit $LASTEXITCODE)" }
+    $fragments = @(Get-ChildItem -Path (Join-Path $dir.FullName "factions.d\*.yaml") -ErrorAction SilentlyContinue)
+    if ($fragments.Count -gt 0) {
+        $fragmentDir = Join-Path $optionDir "SKSE\Plugins\SkyrimNet\config\plugins\IntelEngine\factions.d"
+        New-Item -ItemType Directory -Force -Path $fragmentDir | Out-Null
+        $fragments | Copy-Item -Destination $fragmentDir -Force
+    }
     Write-Host "  $($meta.ModKey) built from Plugins\$($dir.Name)"
 }
 
