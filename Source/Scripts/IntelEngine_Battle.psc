@@ -221,6 +221,7 @@ Event OnUpdate()
     If ManifestActive
         Float elapsed = Utility.GetCurrentRealTime() - ManifestStartTime
         Bool combatOver = !IsAnyManifestActorInCombat()
+        TendBystanders()
 
         ; Assassination: don't clean up until attack has actually triggered
         If ManifestLeaderTarget != None && !ManifestAssassinAttacked
@@ -2022,6 +2023,7 @@ Function ManifestEvent(String manifestJson)
             EndWhile
             IntelEngine.ConfirmManifestationCooldown()
             Core.DebugMsg("Battle: Manifest " + eventType + " - " + defStart + " vs " + (ManifestCount - defStart))
+            SendBystandersIndoors()
         Else
             ; No defenders — abort manifestation (attackers with no targets is immersion-breaking)
             Core.DebugMsg("Battle: Manifest " + eventType + " - no defenders spawned, aborting")
@@ -2210,6 +2212,95 @@ Function CalmManifestActor(Actor fighter)
 EndFunction
 
 Bool _manifestCleaning = false
+Actor[] _bystanders                 ; townspeople running indoors from the current brawl or skirmish
+ObjectReference[] _bystanderDoors   ; and the door each one runs to
+Float Property BystanderRadius = 3000.0 AutoReadOnly  ; around the player; nobody farther than this from a door runs
+
+Function SendBystandersIndoors()
+    {Townspeople near a brawl or skirmish run for the nearest door and go inside, instead of standing and watching or
+    wandering between the fighters. Followers, guards, anyone in combat or on an IntelEngine task stay as they are.}
+    _bystanders = new Actor[10]
+    _bystanderDoors = new ObjectReference[10]
+    Actor[] near = IntelEngine.GetNearbyWitnessNPCs(Game.GetPlayer(), BystanderRadius)  ; named, alive, no soldiers
+    String fact = "ran for cover when " + TheName(ManifestNameB) + " and " + TheName(ManifestNameA) + " came to blows" + PlacePhrase()
+    Int n = 0
+    Int i = 0
+    While i < near.Length && n < _bystanders.Length
+        Actor npc = near[i]
+        If npc && npc.HasKeywordString("ActorTypeNPC") && !npc.IsPlayerTeammate() && !npc.IsGuard() && !npc.IsInCombat()                 && !npc.IsInFaction(Intel_BattleSideA) && !npc.IsInFaction(Intel_BattleSideB) && Core.FindSlotByActor(npc) < 0
+            ObjectReference entrance = NearestWayIndoors(npc)
+            If entrance
+                PO3_SKSEFunctions.SetLinkedRef(npc, entrance, Core.IntelEngine_TravelTarget)
+                ActorUtil.AddPackageOverride(npc, Core.TravelPackage_Run, Core.PRIORITY_TRAVEL, 1)
+                npc.EvaluatePackage()
+                Core.InjectFact(npc, fact)
+                _bystanders[n] = npc
+                _bystanderDoors[n] = entrance
+                n += 1
+            EndIf
+        EndIf
+        i += 1
+    EndWhile
+    Core.DebugMsg("Battle: " + n + " bystanders run indoors (" + near.Length + " nearby)")
+EndFunction
+
+ObjectReference Function NearestWayIndoors(Actor npc)
+    {The nearest door in the NPC's cell that leads into a building, within BystanderRadius. (The resolver's
+    "inside" takes the first such door it finds, which can be across the cell.)}
+    ObjectReference[] doors = IntelEngine.GetCellDoors(npc)
+    ObjectReference best = None
+    Float bestDist = BystanderRadius
+    Int d = 0
+    While d < doors.Length
+        If doors[d] && IntelEngine.GetDoorDestinationRef(doors[d]) && !IntelEngine.IsDoorExterior(doors[d])
+            Float dist = npc.GetDistance(doors[d])
+            If dist < bestDist
+                bestDist = dist
+                best = doors[d]
+            EndIf
+        EndIf
+        d += 1
+    EndWhile
+    Return best
+EndFunction
+
+Function TendBystanders()
+    {Whoever has reached their door goes through it and is off the run.}
+    Int i = 0
+    While i < _bystanders.Length
+        Actor npc = _bystanders[i]
+        If npc
+            ObjectReference entrance = _bystanderDoors[i]
+            If npc.IsDead() || npc.IsInCombat()
+                ReleaseBystander(i)
+            ElseIf npc.GetDistance(entrance) < 250.0
+                entrance.Activate(npc)
+                ReleaseBystander(i)
+            EndIf
+        EndIf
+        i += 1
+    EndWhile
+EndFunction
+
+Function ReleaseBystander(Int i)
+    Actor npc = _bystanders[i]
+    ActorUtil.RemovePackageOverride(npc, Core.TravelPackage_Run)
+    PO3_SKSEFunctions.SetLinkedRef(npc, None, Core.IntelEngine_TravelTarget)
+    npc.EvaluatePackage()
+    _bystanders[i] = None
+    _bystanderDoors[i] = None
+EndFunction
+
+Function ReleaseBystanders()
+    {The fight is over: whoever has not reached a door goes back to their day.}
+    Int i = 0
+    While i < _bystanders.Length
+        If _bystanders[i]
+            ReleaseBystander(i)
+        EndIf
+        i += 1
+    EndWhile
+EndFunction
 Bool _manifestEngaged = false   ; somebody of the current brawl or skirmish has been in combat
 String ManifestReason = ""  ; what the current brawl or skirmish is about (the political event's description)
 String ManifestPlace = ""
@@ -2404,6 +2495,7 @@ Function CleanupManifestation()
         i += 1
     EndWhile
     ManifestCount = 0
+    ReleaseBystanders()
     If handed > 0
         Int winner = 0
         If aliveA > 0 && aliveB == 0
