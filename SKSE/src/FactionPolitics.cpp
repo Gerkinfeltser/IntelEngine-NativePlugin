@@ -1669,6 +1669,10 @@ war_allowed:
         result["spawn_count"] = spawnCount;
         result["spawn_defenders"] = spawnDefenders;
         result["defender_count"] = defenderCount;
+        // Where each side goes home to once it is over (the survivors walk there through the travel resolver).
+        auto holdOf = [&](const std::string& id) { auto cfg = GetFaction(id); return cfg ? cfg->hold : std::string{}; };
+        result["attacker_hold"] = holdOf(attackerFaction);
+        result["target_hold"] = holdOf(targetFaction);
 
         logger::info("FactionPolitics: Event manifestation — {} attacks {} ({}, {} attackers{})",
                      attackerFaction, targetFaction, eventType, spawnCount,
@@ -2902,6 +2906,12 @@ war_allowed:
             eventType == "border_skirmish")) {
             std::string manifestJson = CheckEventManifestation(factionA, factionB, eventType);
             if (!manifestJson.empty()) {
+                // What the fight is about, for the facts the combatants are given (IntelEngine_Battle.ManifestEvent).
+                auto mj = nlohmann::json::parse(manifestJson, nullptr, false);
+                if (!mj.is_discarded()) {
+                    mj["description"] = description;
+                    manifestJson = mj.dump();
+                }
                 out["manifestJson"] = manifestJson;
             }
         }

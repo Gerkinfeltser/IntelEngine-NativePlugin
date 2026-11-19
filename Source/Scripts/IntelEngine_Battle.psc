@@ -1345,6 +1345,7 @@ ObjectReference Property ExitMarkerB Auto Hidden
 Float Property ExitDistance = 14000.0 AutoReadOnly      ; beyond the loaded area: whoever gets there is out of the world
 Float Property BodyOutOfSightDistance = 5000.0 AutoReadOnly     ; nearer than this a body is not removed even off screen
 Float Property WalkerOutOfSightDistance = 7000.0 AutoReadOnly   ; and a living soldier not nearer than this
+Float Property ArrivedOutOfSightDistance = 2500.0 AutoReadOnly  ; one who has arrived where they were sent, not nearer than this
 Float Property AftermathInterval = 6.0 AutoReadOnly     ; seconds between sweeps while a battle's aftermath runs
 Float Property StragglerInterval = 15.0 AutoReadOnly    ; and between looks at what a wound-up battle left behind
 Float Property BodiesStayHours = 6.0 AutoReadOnly       ; game hours the dead stay on the field, wherever the player goes
@@ -1534,6 +1535,14 @@ Int Function OutOfSight(Actor soldier, Actor player, Bool bodiesStay)
         Return 1
     EndIf
     Float distance = soldier.GetDistance(player)
+    ; Arrived where they were sent (a skirmish's survivors go home to their hold, which can be the one the player
+    ; is in) and not in view: gone, or they would stand at the gate for good.
+    If !soldier.IsDead() && distance > ArrivedOutOfSightDistance && !player.HasLOS(soldier)
+        ObjectReference goal = soldier.GetLinkedRef(Core.IntelEngine_TravelTarget)
+        If goal && soldier.GetDistance(goal) < 600.0
+            Return 2
+        EndIf
+    EndIf
     If distance <= BodyOutOfSightDistance
         Return 0
     EndIf
@@ -1644,6 +1653,7 @@ Int Function SweepSoldiers(Bool letGo)
             Int unseen = OutOfSight(soldier, player, bodiesStay)
             If unseen > 0
                 TakeBackTravelOrder(soldier)
+                ForgetSoldierFacts(soldier)
                 soldier.DisableNoWait()
                 soldier.Delete()
                 If unseen == 1
@@ -1653,6 +1663,7 @@ Int Function SweepSoldiers(Bool letGo)
                 EndIf
             ElseIf letGo
                 TakeBackTravelOrder(soldier)
+                ForgetSoldierFacts(soldier)
                 If !soldier.IsDead()
                     soldier.SetActorValue("Aggression", 0.0)
                     soldier.StopCombat()
@@ -1783,6 +1794,16 @@ Function ManifestEvent(String manifestJson)
     String eventType = IntelEngine.StoryResponseGetField(manifestJson, "event_type")
     String attackerFaction = IntelEngine.StoryResponseGetField(manifestJson, "attacker_faction")
     String targetFaction = IntelEngine.StoryResponseGetField(manifestJson, "target_faction")
+    ManifestHomeB = IntelEngine.StoryResponseGetField(manifestJson, "attacker_hold")  ; attackers are side B
+    ManifestHomeA = IntelEngine.StoryResponseGetField(manifestJson, "target_hold")
+    ManifestReason = IntelEngine.StoryResponseGetOptionalField(manifestJson, "description")
+    ManifestPlace = IntelEngine.GetActorParentLocationName(Game.GetPlayer())
+    ManifestNameB = IntelEngine.GetFactionDisplayName(attackerFaction)
+    ManifestNameA = IntelEngine.GetFactionDisplayName(targetFaction)
+    ManifestKind = "brawl"
+    If manifestEventType == "border_skirmish"
+        ManifestKind = "border skirmish"
+    EndIf
     Int spawnCount = IntelEngine.StoryResponseGetField(manifestJson, "spawn_count") as Int
     Bool spawnDefenders = IntelEngine.StoryResponseGetField(manifestJson, "spawn_defenders") == "true"
     Int defenderCount = IntelEngine.StoryResponseGetField(manifestJson, "defender_count") as Int
@@ -1991,6 +2012,7 @@ Function ManifestEvent(String manifestJson)
                 Else
                     foe = ManifestActors[(i - defStart) % defStart]
                 EndIf
+                GiveFighterFact(ManifestActors[i], i >= defStart)
                 If ManifestActors[i] != None && foe != None
                     PO3_SKSEFunctions.SetLinkedRef(ManifestActors[i], foe, Core.IntelEngine_TravelTarget)
                     ActorUtil.AddPackageOverride(ManifestActors[i], Core.TravelPackage_Run, Core.PRIORITY_TRAVEL, 1)
@@ -2189,7 +2211,125 @@ EndFunction
 
 Bool _manifestCleaning = false
 Bool _manifestEngaged = false   ; somebody of the current brawl or skirmish has been in combat
+String ManifestReason = ""  ; what the current brawl or skirmish is about (the political event's description)
+String ManifestPlace = ""
+String ManifestNameA = ""   ; display names of side A (defenders) and side B (attackers)
+String ManifestNameB = ""
+String ManifestKind = ""
 
+String Function PlacePhrase()
+    If ManifestPlace != ""
+        Return " in " + ManifestPlace
+    EndIf
+    Return ""
+EndFunction
+
+String Function TheName(String factionName)
+    {"the Thieves Guild", but "The Companions" as it is (it read "the The Companions", 2026-11-18 20:37).}
+    If StringUtil.Find(factionName, "The ") == 0
+        Return factionName
+    EndIf
+    Return "the " + factionName
+EndFunction
+
+String Function JoinName(String list, String name)
+    If list == ""
+        Return name
+    EndIf
+    Return list + ", " + name
+EndFunction
+
+Function GiveFighterFact(Actor fighter, Bool defender)
+    {Each fighter knows why they are here: they were spawned for the fight and have no past of their own.}
+    If fighter == None
+        Return
+    EndIf
+    String fact
+    If defender
+        fact = "stood with fellow members of " + TheName(ManifestNameA) + " against " + TheName(ManifestNameB) + " in a " + ManifestKind + PlacePhrase()
+    Else
+        fact = "came with fellow members of " + TheName(ManifestNameB) + " to fight " + TheName(ManifestNameA) + " in a " + ManifestKind + PlacePhrase()
+    EndIf
+    If ManifestReason != ""
+        fact += ". What led to it: " + ManifestReason
+    EndIf
+    Core.InjectFact(fighter, fact)
+EndFunction
+
+Function ForgetSoldierFacts(Actor soldier)
+    {Facts are stored under the soldier's id; a deleted soldier's id is handed out again, and whoever gets it would
+    inherit them.}
+    StorageUtil.StringListClear(soldier, "Intel_Facts")
+    StorageUtil.FloatListClear(soldier, "Intel_FactTimes")
+    StorageUtil.UnsetStringValue(soldier, "Intel_FactsRendered")
+    Core.CleanExpiredFacts(soldier)
+EndFunction
+String ManifestHomeA = ""   ; the hold each side of the current brawl or skirmish goes home to (factions.yaml "hold")
+String ManifestHomeB = ""
+
+Function SendFightersHome(Actor[] goers, Int winner)
+    {The survivors of a brawl or skirmish go home to their faction's hold, through the resolver every IntelEngine
+    trip uses. DisperseSoldiers' exit markers lie 14000 units off, in cells that are not loaded or in no cell at
+    all, and nobody could walk there: they stood where the fight ended (17:49 and 18:02, diag:exit cell=None /
+    attached=False, positions unchanged for minutes). Whoever has no hold or no place found keeps the exit marker.}
+    ; Who fell on each side, for the survivors' account of it
+    String fallenA = ""
+    String fallenB = ""
+    Int k = 0
+    While k < goers.Length
+        If goers[k] != None && goers[k].IsDead()
+            If goers[k].IsInFaction(Intel_BattleSideB)
+                fallenB = JoinName(fallenB, goers[k].GetDisplayName())
+            Else
+                fallenA = JoinName(fallenA, goers[k].GetDisplayName())
+            EndIf
+        EndIf
+        k += 1
+    EndWhile
+    Int i = 0
+    While i < goers.Length
+        Actor f = goers[i]
+        If f != None && !f.IsDead()
+            Bool sideB = f.IsInFaction(Intel_BattleSideB)
+            String home = ManifestHomeA
+            If sideB
+                home = ManifestHomeB
+            EndIf
+            ObjectReference dest = None
+            If home != ""
+                dest = IntelEngine.ResolveAnyDestination(f, home)
+            EndIf
+            Bool beaten = (winner == 1 && sideB) || (winner == 2 && !sideB)
+            If dest
+                SendSoldierOff(f, dest, beaten)
+            EndIf
+            String fallen = fallenA
+            String foeName = ManifestNameB
+            If sideB
+                fallen = fallenB
+                foeName = ManifestNameA
+            EndIf
+            String account = "survived a " + ManifestKind + " against " + TheName(foeName) + PlacePhrase()
+            If fallen != ""
+                account += "; of their own side " + fallen + " fell"
+            Else
+                account += "; nobody of their own side fell"
+            EndIf
+            If beaten
+                account += "; their side lost and fled"
+            ElseIf winner != 0
+                account += "; their side won"
+            Else
+                account += "; neither side won"
+            EndIf
+            If dest && home != ""
+                account += "; they are on their way back to " + home
+            EndIf
+            Core.InjectFact(f, account)
+        EndIf
+        i += 1
+    EndWhile
+EndFunction
 Function CleanupManifestation()
     ; One at a time: OnUpdate ran it twice two seconds apart (15:46:57/59, 17:42:25/26).
     If _manifestCleaning
@@ -2206,6 +2346,14 @@ Function CleanupManifestation()
         EndIf
     EndIf
 
+    ; A brawl or skirmish ends the way a battle does: the survivors walk or run off, the bodies stay for a while,
+    ; and SweepSoldiers removes each one once the player does not see it. They used to vanish where they stood, or
+    ; stand about until the area unloaded. (The assassin keeps the old way.)
+    Bool handOver = ManifestLeaderTarget == None
+    Int handed = 0
+    Actor[] goers = new Actor[16]
+    Int aliveA = 0
+    Int aliveB = 0
     Int i = 0
     While i < ManifestCount
         If ManifestActors[i] != None
@@ -2214,6 +2362,25 @@ Function CleanupManifestation()
             ActorUtil.RemovePackageOverride(ManifestActors[i], Core.TravelPackage_Run)
             PO3_SKSEFunctions.SetLinkedRef(ManifestActors[i], None, Core.IntelEngine_TravelTarget)
             ManifestActors[i].EvaluatePackage()
+        EndIf
+        If ManifestActors[i] != None && handOver
+            Actor fighter = ManifestActors[i]
+            If !fighter.IsDead()
+                If fighter.IsInFaction(Intel_BattleSideB)
+                    aliveB += 1
+                Else
+                    aliveA += 1
+                EndIf
+            EndIf
+            If !IsRemembered(fighter)
+                RememberSoldier(fighter)
+            EndIf
+            If handed < 16
+                goers[handed] = fighter
+            EndIf
+            handed += 1
+            ManifestActors[i] = None
+        ElseIf ManifestActors[i] != None
             If ManifestActors[i].IsDead()
                 ; A body the player is looking at is not blinked away (this runs fifteen seconds after the
                 ; fight): it is only flagged for deletion, like the survivors below, and goes with the area.
@@ -2237,6 +2404,19 @@ Function CleanupManifestation()
         i += 1
     EndWhile
     ManifestCount = 0
+    If handed > 0
+        Int winner = 0
+        If aliveA > 0 && aliveB == 0
+            winner = 1
+        ElseIf aliveB > 0 && aliveA == 0
+            winner = 2
+        EndIf
+        DisperseSoldiers(winner, false)   ; reads the sides, so before LeaveBattleSides
+        SendFightersHome(goers, winner)
+        LeaveBattleSides()
+        SoldiersLeaving = true
+        Core.RequestTick(StragglerInterval)
+    EndIf
     ManifestActive = false
     ManifestAssassinAttacked = false
     ManifestAssassinStruck = false
