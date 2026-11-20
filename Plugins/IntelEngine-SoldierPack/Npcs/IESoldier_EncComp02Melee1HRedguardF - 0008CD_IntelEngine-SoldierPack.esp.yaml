@@ -143,38 +143,49 @@ PlayerSkills:
   Magicka: 25
   Stamina: 86
   GearedUpWeapons: 1
+HeadParts:
+- 0EAA71:Skyrim.esm
+- 040208:Skyrim.esm
+- 0E4DA0:Skyrim.esm
+HairColor: 0F7565:Skyrim.esm
 CombatStyle: 068848:Skyrim.esm
 NAM5: 255
-Height: 1
-Weight: 25
+Height: 1.02
+Weight: 100
 SoundLevel: Normal
 DefaultOutfit: 00088F:IntelEngine-SoldierPack.esp
 DefaultPackageList: 021E81:Skyrim.esm
-TextureLighting: '#00473327'
+TextureLighting: '#00432C21'
+FaceMorph:
+  NoseLongVsShort: -0.68
+  NoseUpVsDown: 0.13
+  JawUpVsDown: -1
+  JawNarrowVsWide: 0.4
+  JawForwardVsBack: -0.65
+  CheeksUpVsDown: 0.48
+  CheeksForwardVsBack: 0.17
+  EyesUpVsDown: -0.8
+  EyesInVsOut: 0.23
+  BrowsUpVsDown: -0.17
+  BrowsInVsOut: -0.48
+  LipsUpVsDown: 0.63
+  LipsInVsOut: -0.16
+  ChinNarrowVsWide: 0.27
+  ChinUpVsDown: -0.61
+  ChinUnderbiteVsOverbite: -0.31
+  EyesForwardVsBack: -0.33
+FaceParts:
+  Nose: 20
+  Eyes: 3
+  Mouth: 6
 TintLayers:
-- Index: 34
-  Color: '#000F0440'
-  InterpolationValue: 0.22
-  Preset: 561
-- Index: 35
-  Color: '#000F0440'
-  InterpolationValue: 0.22
-  Preset: 571
-- Index: 36
-  Color: '#000F0440'
-  InterpolationValue: 0.22
-  Preset: 581
-- Index: 37
-  Color: '#000F0440'
-  InterpolationValue: 0.22
-  Preset: 589
-- Index: 38
-  Color: '#000F0440'
-  InterpolationValue: 0.22
-  Preset: -1
-- Index: 42
-  Color: '#000F0440'
-  InterpolationValue: 0.22
-  Preset: -1
+- Index: 23
+  Color: '#00432C21'
+  InterpolationValue: 1
+  Preset: 552
+- Index: 56
+  Color: '#00510000'
+  InterpolationValue: 1
+  Preset: 847
 MajorFlags:
 - 0x40000

@@ -1,0 +1,72 @@
+{
+ "id": 5,
+ "seed": 912246,
+ "spread": 0.5,
+ "base_game_only": true,
+ "race": "OrcRace",
+ "race_formid": "013747:Skyrim.esm",
+ "sex": "male",
+ "Voice": "013AEA:Skyrim.esm",
+ "FaceMorph": {
+  "NoseLongVsShort": 0.92,
+  "NoseUpVsDown": -0.15,
+  "JawUpVsDown": 0.06,
+  "JawNarrowVsWide": 0.72,
+  "JawForwardVsBack": -0.05,
+  "CheeksUpVsDown": 1.0,
+  "CheeksForwardVsBack": 0.04,
+  "EyesUpVsDown": 0.08,
+  "EyesInVsOut": -0.72,
+  "BrowsUpVsDown": -0.73,
+  "BrowsInVsOut": 0.33,
+  "BrowsForwardVsBack": -0.52,
+  "LipsUpVsDown": 0.0,
+  "LipsInVsOut": 1.0,
+  "ChinNarrowVsWide": -0.3,
+  "ChinUpVsDown": 0.17,
+  "ChinUnderbiteVsOverbite": 0.12,
+  "EyesForwardVsBack": 1.0
+ },
+ "FaceParts": {
+  "Nose": 29,
+  "Eyes": 28,
+  "Mouth": 27
+ },
+ "HeadParts": [
+  "05E79F:Skyrim.esm",
+  "04022A:Skyrim.esm",
+  "0C710A:Skyrim.esm"
+ ],
+ "HairColor": "0F7565:Skyrim.esm",
+ "TextureLighting": [
+  80,
+  92,
+  82
+ ],
+ "TintLayers": [
+  {
+   "Index": 1,
+   "Color": [
+    80,
+    92,
+    82
+   ],
+   "InterpolationValue": 1,
+   "Preset": 63
+  },
+  {
+   "Index": 52,
+   "Color": [
+    146,
+    133,
+    39
+   ],
+   "InterpolationValue": 1.0,
+   "Preset": 372
+  }
+ ],
+ "Weight": 19,
+ "Height": 0.99,
+ "group": "Companions",
+ "n": 12
+}

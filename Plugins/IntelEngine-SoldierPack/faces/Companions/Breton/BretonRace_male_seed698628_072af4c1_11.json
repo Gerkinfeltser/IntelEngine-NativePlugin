@@ -1,0 +1,72 @@
+{
+ "id": 11,
+ "seed": 698628,
+ "spread": 0.5,
+ "base_game_only": true,
+ "race": "BretonRace",
+ "race_formid": "013741:Skyrim.esm",
+ "sex": "male",
+ "Voice": "013AD2:Skyrim.esm",
+ "FaceMorph": {
+  "NoseLongVsShort": -0.4,
+  "NoseUpVsDown": -0.43,
+  "JawUpVsDown": 0.15,
+  "JawNarrowVsWide": -1.0,
+  "JawForwardVsBack": -0.29,
+  "CheeksUpVsDown": -0.05,
+  "CheeksForwardVsBack": -1.0,
+  "EyesUpVsDown": -0.18,
+  "EyesInVsOut": 0.39,
+  "BrowsUpVsDown": -0.07,
+  "BrowsInVsOut": -0.7,
+  "BrowsForwardVsBack": -0.22,
+  "LipsUpVsDown": 0.27,
+  "LipsInVsOut": 0.27,
+  "ChinNarrowVsWide": -1.0,
+  "ChinUpVsDown": -0.83,
+  "ChinUnderbiteVsOverbite": -0.72,
+  "EyesForwardVsBack": -0.34
+ },
+ "FaceParts": {
+  "Nose": 20,
+  "Eyes": 9,
+  "Mouth": 2
+ },
+ "HeadParts": [
+  "0DFC04:Skyrim.esm",
+  "0C7259:Skyrim.esm",
+  "0E7AED:Skyrim.esm"
+ ],
+ "HairColor": "0A0431:Skyrim.esm",
+ "TextureLighting": [
+  167,
+  134,
+  122
+ ],
+ "TintLayers": [
+  {
+   "Index": 2,
+   "Color": [
+    167,
+    134,
+    122
+   ],
+   "InterpolationValue": 1,
+   "Preset": 77
+  },
+  {
+   "Index": 30,
+   "Color": [
+    81,
+    0,
+    0
+   ],
+   "InterpolationValue": 0.5,
+   "Preset": 181
+  }
+ ],
+ "Weight": 48,
+ "Height": 0.96,
+ "group": "Companions",
+ "n": 54
+}

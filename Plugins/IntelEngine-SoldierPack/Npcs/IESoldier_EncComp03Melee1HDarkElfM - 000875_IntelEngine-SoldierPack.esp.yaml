@@ -163,57 +163,51 @@ PlayerSkills:
   Stamina: 75
   GearedUpWeapons: 1
 HeadParts:
-- 08555F:Skyrim.esm
-- 0EC3B0:Skyrim.esm
-- 0510B5:Skyrim.esm
-- 053927:Skyrim.esm
-- 0C716D:Skyrim.esm
-HairColor: 0A0436:Skyrim.esm
+- 0F1A99:Skyrim.esm
+- 053929:Skyrim.esm
+- 0C7122:Skyrim.esm
+- 0CDD8D:Skyrim.esm
+HairColor: 0A0434:Skyrim.esm
 CombatStyle: 068849:Skyrim.esm
 NAM5: 255
-Height: 1
+Height: 0.99
+Weight: 69
 SoundLevel: Normal
 DefaultOutfit: 000816:IntelEngine-SoldierPack.esp
 TextureLighting: '#00535B5B'
 FaceMorph:
   NoseLongVsShort: 1
-  NoseUpVsDown: -0.9
-  JawUpVsDown: -0.3
-  JawNarrowVsWide: -0.2
-  JawForwardVsBack: 0.5
-  CheeksUpVsDown: -0.3
-  CheeksForwardVsBack: -0.9
-  EyesUpVsDown: -1
-  EyesInVsOut: -0.3
-  BrowsUpVsDown: -1
-  BrowsInVsOut: 0.3
-  LipsUpVsDown: -0.6
+  NoseUpVsDown: -0.48
+  JawUpVsDown: 0.15
+  JawNarrowVsWide: 1
+  JawForwardVsBack: -0.24
+  CheeksUpVsDown: 0.13
+  CheeksForwardVsBack: 1
+  EyesUpVsDown: 0.38
+  EyesInVsOut: 0.54
+  BrowsUpVsDown: 0.87
+  BrowsInVsOut: 0.98
+  BrowsForwardVsBack: 0.24
+  LipsUpVsDown: -0.88
   LipsInVsOut: 1
-  ChinNarrowVsWide: -0.8
-  ChinUnderbiteVsOverbite: -1
-  EyesForwardVsBack: 0.2
+  ChinNarrowVsWide: -0.04
+  ChinUpVsDown: 0.06
+  ChinUnderbiteVsOverbite: 0.73
+  EyesForwardVsBack: 0.54
   Unknown: 3.4028235E+38
 FaceParts:
-  Nose: 5
+  Nose: 13
   Unknown: 4294967295
-  Eyes: 23
-  Mouth: 12
+  Eyes: 6
+  Mouth: 10
 TintLayers:
 - Index: 1
   Color: '#00535B5B'
   InterpolationValue: 1
   Preset: 69
-- Index: 2
-  Color: '#00212B52'
-  InterpolationValue: 0.83
-  Preset: 73
-- Index: 7
-  Color: '#00212B52'
-  InterpolationValue: 0.44
-  Preset: 92
-- Index: 8
-  Color: '#00796333'
+- Index: 14
+  Color: '#00510000'
   InterpolationValue: 0.5
-  Preset: 95
+  Preset: 144
 MajorFlags:
 - 0x40000

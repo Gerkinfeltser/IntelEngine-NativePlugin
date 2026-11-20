@@ -144,13 +144,51 @@ PlayerSkills:
   Magicka: 25
   Stamina: 86
   GearedUpWeapons: 1
+HeadParts:
+- 0513FC:Skyrim.esm
+- 023FE1:Skyrim.esm
+- 0C7259:Skyrim.esm
+- 0CDDAD:Skyrim.esm
+HairColor: 0A0435:Skyrim.esm
 CombatStyle: 068848:Skyrim.esm
 NAM5: 255
-Height: 1
-Weight: 25
+Height: 0.95
+Weight: 2
 SoundLevel: Normal
 DefaultOutfit: 00088F:IntelEngine-SoldierPack.esp
 DefaultPackageList: 021E81:Skyrim.esm
-TextureLighting: '#00513D35'
+TextureLighting: '#004F4540'
+FaceMorph:
+  NoseLongVsShort: -0.79
+  NoseUpVsDown: 0.55
+  JawUpVsDown: -1
+  JawNarrowVsWide: -1
+  JawForwardVsBack: -0.65
+  CheeksUpVsDown: 0.39
+  CheeksForwardVsBack: 0.3
+  EyesUpVsDown: 0.94
+  EyesInVsOut: -0.15
+  BrowsUpVsDown: -0.42
+  BrowsInVsOut: 0.76
+  BrowsForwardVsBack: 0.59
+  LipsUpVsDown: 1
+  LipsInVsOut: -0.22
+  ChinNarrowVsWide: 0.45
+  ChinUpVsDown: -0.6
+  ChinUnderbiteVsOverbite: 0.18
+  EyesForwardVsBack: -0.6
+FaceParts:
+  Nose: 17
+  Eyes: 16
+  Mouth: 17
+TintLayers:
+- Index: 1
+  Color: '#004F4540'
+  InterpolationValue: 1
+  Preset: 75
+- Index: 26
+  Color: '#00FDFDFD'
+  InterpolationValue: 0.28
+  Preset: 220
 MajorFlags:
 - 0x40000

@@ -1,0 +1,73 @@
+{
+ "id": 6,
+ "seed": 590812,
+ "spread": 0.5,
+ "base_game_only": true,
+ "race": "ImperialRace",
+ "race_formid": "013744:Skyrim.esm",
+ "sex": "male",
+ "Voice": "013AD2:Skyrim.esm",
+ "FaceMorph": {
+  "NoseLongVsShort": -0.26,
+  "NoseUpVsDown": -0.11,
+  "JawUpVsDown": -1.0,
+  "JawNarrowVsWide": 0.29,
+  "JawForwardVsBack": -1.0,
+  "CheeksUpVsDown": 0.08,
+  "CheeksForwardVsBack": -0.11,
+  "EyesUpVsDown": -0.42,
+  "EyesInVsOut": 0.22,
+  "BrowsUpVsDown": -0.42,
+  "BrowsInVsOut": 0.79,
+  "BrowsForwardVsBack": 0.1,
+  "LipsUpVsDown": 0.29,
+  "LipsInVsOut": -0.0,
+  "ChinNarrowVsWide": 0.31,
+  "ChinUpVsDown": -0.34,
+  "ChinUnderbiteVsOverbite": 0.23,
+  "EyesForwardVsBack": 0.3
+ },
+ "FaceParts": {
+  "Nose": 1,
+  "Eyes": 11,
+  "Mouth": 19
+ },
+ "HeadParts": [
+  "05140C:Skyrim.esm",
+  "0C7122:Skyrim.esm",
+  "0C3CC4:Skyrim.esm",
+  "02424F:Skyrim.esm"
+ ],
+ "HairColor": "0A0435:Skyrim.esm",
+ "TextureLighting": [
+  183,
+  156,
+  145
+ ],
+ "TintLayers": [
+  {
+   "Index": 1,
+   "Color": [
+    183,
+    156,
+    145
+   ],
+   "InterpolationValue": 1,
+   "Preset": 62
+  },
+  {
+   "Index": 54,
+   "Color": [
+    10,
+    9,
+    49
+   ],
+   "InterpolationValue": 1.0,
+   "Preset": 409
+  }
+ ],
+ "Weight": 44,
+ "Height": 1.04,
+ "group": "Companions",
+ "n": 45
+}

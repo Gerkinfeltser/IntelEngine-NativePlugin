@@ -1,0 +1,73 @@
+{
+ "id": 9,
+ "seed": 505810,
+ "spread": 0.5,
+ "base_game_only": true,
+ "race": "WoodElfRace",
+ "race_formid": "013749:Skyrim.esm",
+ "sex": "male",
+ "Voice": "013AF0:Skyrim.esm",
+ "FaceMorph": {
+  "NoseLongVsShort": 0.91,
+  "NoseUpVsDown": -0.41,
+  "JawUpVsDown": 0.46,
+  "JawNarrowVsWide": -1.0,
+  "JawForwardVsBack": -0.25,
+  "CheeksUpVsDown": 0.4,
+  "CheeksForwardVsBack": 0.32,
+  "EyesUpVsDown": 0.25,
+  "EyesInVsOut": -1.0,
+  "BrowsUpVsDown": -0.37,
+  "BrowsInVsOut": -0.16,
+  "BrowsForwardVsBack": -0.55,
+  "LipsUpVsDown": -1.0,
+  "LipsInVsOut": 1.0,
+  "ChinNarrowVsWide": 0.6,
+  "ChinUpVsDown": 0.91,
+  "ChinUnderbiteVsOverbite": 0.96,
+  "EyesForwardVsBack": 0.36
+ },
+ "FaceParts": {
+  "Nose": 2,
+  "Eyes": 8,
+  "Mouth": 19
+ },
+ "HeadParts": [
+  "0F1A99:Skyrim.esm",
+  "053917:Skyrim.esm",
+  "0C7122:Skyrim.esm",
+  "0F5009:Skyrim.esm"
+ ],
+ "HairColor": "0A0434:Skyrim.esm",
+ "TextureLighting": [
+  121,
+  91,
+  64
+ ],
+ "TintLayers": [
+  {
+   "Index": 1,
+   "Color": [
+    121,
+    91,
+    64
+   ],
+   "InterpolationValue": 1,
+   "Preset": 64
+  },
+  {
+   "Index": 56,
+   "Color": [
+    81,
+    0,
+    0
+   ],
+   "InterpolationValue": 1.0,
+   "Preset": 365
+  }
+ ],
+ "Weight": 70,
+ "Height": 1.02,
+ "group": "Companions",
+ "n": 37
+}

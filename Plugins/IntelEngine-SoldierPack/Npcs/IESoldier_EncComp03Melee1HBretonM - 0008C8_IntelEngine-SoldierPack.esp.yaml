@@ -166,65 +166,51 @@ PlayerSkills:
   Stamina: 107
   GearedUpWeapons: 1
 HeadParts:
-- 08555F:Skyrim.esm
 - 051403:Skyrim.esm
-- 01750B:Skyrim.esm
-- 023FB7:Skyrim.esm
-- 0F203C:Skyrim.esm
-HairColor: 0A0436:Skyrim.esm
+- 023FE1:Skyrim.esm
+- 0C7122:Skyrim.esm
+- 0C3CE5:Skyrim.esm
+HairColor: 0A042F:Skyrim.esm
 CombatStyle: 068849:Skyrim.esm
 NAM5: 255
-Height: 1
-Weight: 21
+Height: 0.98
+Weight: 39
 SoundLevel: Normal
 DefaultOutfit: 000816:IntelEngine-SoldierPack.esp
-HeadTexture: 0D0731:Skyrim.esm
-TextureLighting: '#00C6B0A8'
+TextureLighting: '#00A7867A'
 FaceMorph:
-  NoseLongVsShort: -0.7
-  NoseUpVsDown: 0.5
-  JawUpVsDown: -0.5
-  JawNarrowVsWide: -1
-  CheeksUpVsDown: -0.1
-  CheeksForwardVsBack: 0.3
-  EyesUpVsDown: 0.34
-  EyesInVsOut: 0.7
-  BrowsInVsOut: 0.2
-  LipsUpVsDown: -0.3
-  LipsInVsOut: -0.4
-  ChinNarrowVsWide: 1
-  ChinUpVsDown: 0.8
-  EyesForwardVsBack: 0.1
+  NoseLongVsShort: -0.76
+  NoseUpVsDown: -0.68
+  JawUpVsDown: -0.93
+  JawNarrowVsWide: 0.59
+  JawForwardVsBack: 0.31
+  CheeksUpVsDown: 0.15
+  CheeksForwardVsBack: -0.25
+  EyesUpVsDown: 0.52
+  EyesInVsOut: -0.53
+  BrowsUpVsDown: -1
+  BrowsInVsOut: 0.1
+  BrowsForwardVsBack: -0.17
+  LipsUpVsDown: -0.26
+  LipsInVsOut: -0.99
+  ChinNarrowVsWide: -0.58
+  ChinUpVsDown: 0.43
+  ChinUnderbiteVsOverbite: 0.03
+  EyesForwardVsBack: -0.77
   Unknown: 3.4028235E+38
 FaceParts:
-  Nose: 17
+  Nose: 9
   Unknown: 4294967295
-  Eyes: 4
-  Mouth: 12
+  Eyes: 16
+  Mouth: 5
 TintLayers:
 - Index: 2
-  Color: '#00C6B0A8'
+  Color: '#00A7867A'
   InterpolationValue: 1
-  Preset: 75
-- Index: 3
-  Color: '#00500901'
-  InterpolationValue: 0.5
-  Preset: 88
-- Index: 4
-  Color: '#00500901'
-  InterpolationValue: 0.5
-  Preset: 96
-- Index: 9
-  Color: '#000F0440'
-  InterpolationValue: 0.35
-  Preset: 123
-- Index: 10
-  Color: '#00500901'
-  InterpolationValue: 0.5
-  Preset: 130
-- Index: 5
-  Color: '#00000000'
-  InterpolationValue: 0.75
-  Preset: 631
+  Preset: 77
+- Index: 61
+  Color: '#00274725'
+  InterpolationValue: 1
+  Preset: 430
 MajorFlags:
 - 0x40000

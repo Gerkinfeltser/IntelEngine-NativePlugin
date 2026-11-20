@@ -1,0 +1,72 @@
+{
+ "id": 7,
+ "seed": 668696,
+ "spread": 0.5,
+ "base_game_only": true,
+ "race": "NordRace",
+ "race_formid": "013746:Skyrim.esm",
+ "sex": "female",
+ "Voice": "013ADD:Skyrim.esm",
+ "FaceMorph": {
+  "NoseLongVsShort": 0.44,
+  "NoseUpVsDown": -0.28,
+  "JawUpVsDown": -0.91,
+  "JawNarrowVsWide": -1.0,
+  "JawForwardVsBack": 0.6,
+  "CheeksUpVsDown": 0.01,
+  "CheeksForwardVsBack": -0.1,
+  "EyesUpVsDown": -0.63,
+  "EyesInVsOut": -0.44,
+  "BrowsUpVsDown": -0.84,
+  "BrowsInVsOut": -0.16,
+  "BrowsForwardVsBack": 0.58,
+  "LipsUpVsDown": 0.02,
+  "LipsInVsOut": -0.5,
+  "ChinNarrowVsWide": -0.93,
+  "ChinUpVsDown": -0.13,
+  "ChinUnderbiteVsOverbite": -0.19,
+  "EyesForwardVsBack": -0.77
+ },
+ "FaceParts": {
+  "Nose": 2,
+  "Eyes": 2,
+  "Mouth": 6
+ },
+ "HeadParts": [
+  "0EAA71:Skyrim.esm",
+  "040228:Skyrim.esm",
+  "0E4DA5:Skyrim.esm"
+ ],
+ "HairColor": "0A0438:Skyrim.esm",
+ "TextureLighting": [
+  185,
+  179,
+  170
+ ],
+ "TintLayers": [
+  {
+   "Index": 24,
+   "Color": [
+    185,
+    179,
+    170
+   ],
+   "InterpolationValue": 1,
+   "Preset": 603
+  },
+  {
+   "Index": 44,
+   "Color": [
+    19,
+    20,
+    40
+   ],
+   "InterpolationValue": 1.0,
+   "Preset": 696
+  }
+ ],
+ "Weight": 37,
+ "Height": 1.0,
+ "group": "Companions",
+ "n": 2
+}

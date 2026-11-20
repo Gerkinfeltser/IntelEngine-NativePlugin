@@ -179,69 +179,53 @@ PlayerSkills:
   Stamina: 246
   GearedUpWeapons: 1
 HeadParts:
-- 08555F:Skyrim.esm
-- 0D0564:Skyrim.esm
-- 0DFB30:Skyrim.esm
-- 05107F:Skyrim.esm
-- 024244:Skyrim.esm
-HairColor: 0A0434:Skyrim.esm
+- 0DFC04:Skyrim.esm
+- 051508:Skyrim.esm
+- 0C3CD0:Skyrim.esm
+- 0E7AEC:Skyrim.esm
+HairColor: 0A042D:Skyrim.esm
 CombatStyle: 03BE1B:Skyrim.esm
 NAM5: 255
-Height: 1
-Weight: 75
+Height: 0.99
+Weight: 100
 SoundLevel: Normal
 DefaultOutfit: 000897:IntelEngine-SoldierPack.esp
 DefaultPackageList: 021E81:Skyrim.esm
-HeadTexture: 073259:Skyrim.esm
-TextureLighting: '#00C6B0A8'
+TextureLighting: '#00B79C91'
 FaceMorph:
-  NoseLongVsShort: 1
-  NoseUpVsDown: 0.56
-  JawUpVsDown: 0.78
-  JawNarrowVsWide: 0.12
-  JawForwardVsBack: -0.66
-  CheeksUpVsDown: 0.32
+  NoseLongVsShort: -1
+  NoseUpVsDown: 0.97
+  JawUpVsDown: -0.46
+  JawNarrowVsWide: 1
+  JawForwardVsBack: 0.65
+  CheeksUpVsDown: -0.1
   CheeksForwardVsBack: 1
   EyesUpVsDown: 1
-  EyesInVsOut: 0.14
-  BrowsUpVsDown: -1
-  BrowsForwardVsBack: 0.76
-  LipsUpVsDown: 0.26
-  LipsInVsOut: 0.66
-  ChinNarrowVsWide: 1
-  ChinUnderbiteVsOverbite: 0.08
-  EyesForwardVsBack: -0.64
+  EyesInVsOut: 1
+  BrowsUpVsDown: -0.03
+  BrowsInVsOut: 0.76
+  BrowsForwardVsBack: 1
+  LipsUpVsDown: 1
+  LipsInVsOut: -0.05
+  ChinNarrowVsWide: -0.08
+  ChinUpVsDown: -1
+  ChinUnderbiteVsOverbite: 0.66
+  EyesForwardVsBack: -1
   Unknown: 3.4028235E+38
 FaceParts:
-  Nose: 1
+  Nose: 12
   Unknown: 4294967295
-  Eyes: 9
-  Mouth: 15
+  Eyes: 18
+  Mouth: 10
 TintLayers:
 - Index: 1
-  Color: '#00C6B0A8'
+  Color: '#00B79C91'
   InterpolationValue: 1
-  Preset: 75
-- Index: 2
-  Color: '#00000000'
-  InterpolationValue: 1
-  Preset: 91
-- Index: 3
-  Color: '#002F2013'
-  InterpolationValue: 1
-  Preset: 100
-- Index: 8
-  Color: '#002F2013'
-  InterpolationValue: 0.61
-  Preset: 126
-- Index: 19
-  Color: '#00000000'
-  InterpolationValue: 1
-  Preset: 583
-- Index: 25
-  Color: '#002F2013'
-  InterpolationValue: 1
-  Preset: 589
+  Preset: 76
+- Index: 63
+  Color: '#001A4957'
+  InterpolationValue: 0.69
+  Preset: 477
 MajorFlags:
 - 0x40000
 - 0x80000

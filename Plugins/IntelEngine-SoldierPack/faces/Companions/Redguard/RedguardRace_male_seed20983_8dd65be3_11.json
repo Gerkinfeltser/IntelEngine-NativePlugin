@@ -1,0 +1,73 @@
+{
+ "id": 11,
+ "seed": 20983,
+ "spread": 0.5,
+ "base_game_only": true,
+ "race": "RedguardRace",
+ "race_formid": "013748:Skyrim.esm",
+ "sex": "male",
+ "Voice": "013AD2:Skyrim.esm",
+ "FaceMorph": {
+  "NoseLongVsShort": -0.92,
+  "NoseUpVsDown": 0.57,
+  "JawUpVsDown": -0.37,
+  "JawNarrowVsWide": 0.39,
+  "JawForwardVsBack": -0.36,
+  "CheeksUpVsDown": 1.0,
+  "CheeksForwardVsBack": -0.22,
+  "EyesUpVsDown": 0.12,
+  "EyesInVsOut": 0.67,
+  "BrowsUpVsDown": -0.11,
+  "BrowsInVsOut": 0.33,
+  "BrowsForwardVsBack": 1.0,
+  "LipsUpVsDown": 1.0,
+  "LipsInVsOut": -0.45,
+  "ChinNarrowVsWide": -0.57,
+  "ChinUpVsDown": 0.35,
+  "ChinUnderbiteVsOverbite": 0.55,
+  "EyesForwardVsBack": -0.4
+ },
+ "FaceParts": {
+  "Nose": 9,
+  "Eyes": 17,
+  "Mouth": 11
+ },
+ "HeadParts": [
+  "0513FD:Skyrim.esm",
+  "0E7AED:Skyrim.esm",
+  "0C7170:Skyrim.esm",
+  "0C3CC8:Skyrim.esm"
+ ],
+ "HairColor": "0A0435:Skyrim.esm",
+ "TextureLighting": [
+  67,
+  44,
+  33
+ ],
+ "TintLayers": [
+  {
+   "Index": 1,
+   "Color": [
+    67,
+    44,
+    33
+   ],
+   "InterpolationValue": 1,
+   "Preset": 78
+  },
+  {
+   "Index": 25,
+   "Color": [
+    19,
+    20,
+    40
+   ],
+   "InterpolationValue": 1.0,
+   "Preset": 203
+  }
+ ],
+ "Weight": 92,
+ "Height": 1.05,
+ "group": "CompanionRedgaurdM",
+ "n": 2
+}

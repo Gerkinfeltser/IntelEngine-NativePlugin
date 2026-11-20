@@ -1,0 +1,72 @@
+{
+ "id": 4,
+ "seed": 768879,
+ "spread": 0.5,
+ "base_game_only": true,
+ "race": "DarkElfRace",
+ "race_formid": "013742:Skyrim.esm",
+ "sex": "male",
+ "Voice": "013AF0:Skyrim.esm",
+ "FaceMorph": {
+  "NoseLongVsShort": -0.19,
+  "NoseUpVsDown": 0.05,
+  "JawUpVsDown": -0.25,
+  "JawNarrowVsWide": 0.84,
+  "JawForwardVsBack": -0.36,
+  "CheeksUpVsDown": 0.48,
+  "CheeksForwardVsBack": -0.22,
+  "EyesUpVsDown": 0.17,
+  "EyesInVsOut": 0.03,
+  "BrowsUpVsDown": -1.0,
+  "BrowsInVsOut": 0.39,
+  "BrowsForwardVsBack": -0.14,
+  "LipsUpVsDown": -0.59,
+  "LipsInVsOut": 1.0,
+  "ChinNarrowVsWide": 0.01,
+  "ChinUpVsDown": 0.72,
+  "ChinUnderbiteVsOverbite": 0.43,
+  "EyesForwardVsBack": -0.61
+ },
+ "FaceParts": {
+  "Nose": 1,
+  "Eyes": 11,
+  "Mouth": 8
+ },
+ "HeadParts": [
+  "0F1A9A:Skyrim.esm",
+  "053927:Skyrim.esm",
+  "0C7122:Skyrim.esm"
+ ],
+ "HairColor": "0A0434:Skyrim.esm",
+ "TextureLighting": [
+  83,
+  91,
+  91
+ ],
+ "TintLayers": [
+  {
+   "Index": 1,
+   "Color": [
+    83,
+    91,
+    91
+   ],
+   "InterpolationValue": 1,
+   "Preset": 69
+  },
+  {
+   "Index": 20,
+   "Color": [
+    0,
+    0,
+    0
+   ],
+   "InterpolationValue": 0.76,
+   "Preset": 283
+  }
+ ],
+ "Weight": 45,
+ "Height": 1.04,
+ "group": "Companions",
+ "n": 28
+}

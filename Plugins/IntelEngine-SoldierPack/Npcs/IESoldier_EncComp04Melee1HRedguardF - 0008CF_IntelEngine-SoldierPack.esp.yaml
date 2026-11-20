@@ -165,130 +165,52 @@ PlayerSkills:
   Stamina: 100
   GearedUpWeapons: 1
 HeadParts:
-- 0EC1B2:Skyrim.esm
-- 0EAA77:Skyrim.esm
-- 0F81D4:Skyrim.esm
-HairColor: 0A0438:Skyrim.esm
+- 051107:Skyrim.esm
+- 07291C:Skyrim.esm
+- 0E4D7C:Skyrim.esm
+HairColor: 0A0436:Skyrim.esm
 CombatStyle: 068847:Skyrim.esm
 NAM5: 255
-Height: 1
-Weight: 90
+Height: 1.05
+Weight: 34
 SoundLevel: Normal
 DefaultOutfit: 000816:IntelEngine-SoldierPack.esp
 DefaultPackageList: 021E81:Skyrim.esm
-HeadTexture: 0F206B:Skyrim.esm
-TextureLighting: '#00513D35'
+TextureLighting: '#002D211E'
 FaceMorph:
-  NoseUpVsDown: 0.34
-  EyesUpVsDown: 0.38
-  LipsUpVsDown: 0.44
-  LipsInVsOut: 0.6
-  ChinNarrowVsWide: 0.2
+  NoseLongVsShort: -0.12
+  NoseUpVsDown: 0.4
+  JawUpVsDown: -0.95
+  JawNarrowVsWide: 0.01
+  JawForwardVsBack: 0.59
+  CheeksUpVsDown: 0.05
+  CheeksForwardVsBack: 0.63
+  EyesUpVsDown: -0.57
+  EyesInVsOut: -0.05
+  BrowsUpVsDown: -0.56
+  BrowsInVsOut: 0.02
+  BrowsForwardVsBack: -0.62
+  LipsUpVsDown: 0.5
+  LipsInVsOut: 0.59
+  ChinNarrowVsWide: 0.72
+  ChinUpVsDown: 0.09
   ChinUnderbiteVsOverbite: 0.5
-  EyesForwardVsBack: -0.6
+  EyesForwardVsBack: 0.43
   Unknown: 3.4028235E+38
 FaceParts:
-  Nose: 13
+  Nose: 12
   Unknown: 4294967295
-  Eyes: 3
-  Mouth: 4
+  Eyes: 14
+  Mouth: 19
 TintLayers:
 - Index: 23
-  Color: '#00513D35'
+  Color: '#002D211E'
   InterpolationValue: 1
-  Preset: 550
-- Index: 34
-  Color: '#00000000'
-  InterpolationValue: 1
-  Preset: 565
-- Index: 35
-  Color: '#00000000'
-  InterpolationValue: 1
-  Preset: 575
-- Index: 39
-  Color: '#00000000'
-  InterpolationValue: 1
-  Preset: 601
-- Index: 40
-  Color: '#00430401'
-  InterpolationValue: 0.72
-  Preset: 604
-- Index: 45
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 624
+  Preset: 555
 - Index: 46
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 648
-- Index: 47
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 672
-- Index: 48
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 696
-- Index: 49
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 720
-- Index: 50
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 744
-- Index: 51
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 768
-- Index: 52
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 792
-- Index: 53
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: -1
-- Index: 54
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 818
-- Index: 56
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 842
-- Index: 57
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 866
-- Index: 58
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 890
-- Index: 59
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 914
-- Index: 60
-  Color: '#00FDFDFD'
-  InterpolationValue: 0.7
-  Preset: 940
-- Index: 44
-  Color: '#00000000'
+  Color: '#00510000'
   InterpolationValue: 1
-  Preset: 993
-- Index: 55
-  Color: '#00000000'
-  InterpolationValue: 1
-  Preset: 995
-- Index: 61
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 1000
-- Index: 62
-  Color: '#00000000'
-  InterpolationValue: 0
-  Preset: 1005
+  Preset: 653
 MajorFlags:
 - 0x40000
 - 0x80000
