@@ -571,6 +571,13 @@ war_allowed:
         return factions_[it->second].soldierTemplate;
     }
 
+    std::string FactionPolitics::GetHomeMarker(const std::string& factionId) const {
+        std::lock_guard<std::mutex> lock(configMutex_);
+        auto it = factionIndex_.find(factionId);
+        if (it == factionIndex_.end()) return "";
+        return factions_[it->second].homeMarker;
+    }
+
     std::vector<std::string> FactionPolitics::GetAllFactionIds() const {
         std::lock_guard<std::mutex> lock(configMutex_);
         std::vector<std::string> ids;

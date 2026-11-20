@@ -52,6 +52,7 @@ namespace IntelEngine {
         int warThreshold = -50;
         std::string conflictStyle;  // brawl, sabotage, assassination, proxy — used in Political DM context
         std::string soldierTemplate; // EditorID of leveled actor list for battle spawning
+        std::string homeMarker;      // optional reference its soldiers walk toward after a battle (form id text)
         std::string prisonLocation;  // Cell EditorID for prisoner holding (Phase 4)
         float prisonMarker[3] = {};  // [x, y, z] position within prison cell (Phase 4)
         int peSide = -1;            // optional Political Engine side (0-3); -1 = derive from skyrimFactionId
@@ -121,6 +122,9 @@ namespace IntelEngine {
 
         /** Get soldier template EditorID for a faction. Empty if not configured. */
         std::string GetSoldierTemplate(const std::string& factionId) const;
+
+        /** Get the home_marker form id text for a faction. Empty if not configured. */
+        std::string GetHomeMarker(const std::string& factionId) const;
 
         /** Get all known faction IDs. Used for fuzzy matching DM suggestions. */
         std::vector<std::string> GetAllFactionIds() const;

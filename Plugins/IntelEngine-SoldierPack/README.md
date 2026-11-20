@@ -27,3 +27,21 @@ Spriggit.CLI serialize -i <path>/IntelEngine-SoldierPack.esp -o Plugins/IntelEng
 - New face: copy a 1H NPC of that tier, give it the next free FormID and a new editor ID, change only the face fields, add it to that tier's `IESoldier_SubCharComp0<tier>Melee1H` list, then bake FaceGen for that NPC.
 - No FaceGen is shipped: the installer option names Face Discoloration Fix (Nexus 42441), which builds the faces at run time (seen working in game 2026-11-18).
 - FaceGen (`meshes/.../facegeom/IntelEngine-SoldierPack.esp/*.nif`, `textures/.../facetint/IntelEngine-SoldierPack.esp/*.dds`) is binary and not part of this YAML.
+
+## Status (2026-11-20: on hold)
+
+Branches: `feat/soldier-pack-yaml` (this repo) and `feat/soldier-pack-option` (GamePlugin). Both include the 3.8.3 merge. No PR is open.
+
+Seen in game:
+- The esp loads and its soldiers spawn from the console (2026-11-20, build before the aggression change). Such a soldier attacked the player: the cause was the bandit template's VeryAggressive, fixed in `7ca9141`, not yet seen in game.
+- Face Discoloration Fix builds the faces at run time (2026-11-18, earlier faces).
+- Templates are looked up by name only (2026-11-17).
+
+Built and checked offline only, nobody has seen these in game:
+- The 72 flame-lab faces on the 1H NPCs (own-race warpaint only).
+- Aggressive instead of VeryAggressive on the six tier templates and the 24 archers (`7ca9141`).
+- The installer option and its Companions `factions.d` fragment, which raises the Companions from `IESoldier_LCharCompAny`.
+- Survivors walk home: `home_marker` in `factions.d` (DLL + `IntelEngine_Battle.psc`, `WayOff`). The Companions use `Skyrim.esm|0x0BC0BF` (C00JorrvaskrFightCenterPoint); that this marker is outdoors behind Jorrvaskr is not checked. Only full battles (`DisperseSoldiers`) use it; story ambushes and assassinations still calm and remove their actors as before.
+- Offline checks: the esp round-trips clean through Spriggit, `verify.ps1` passes (95 checks), the DLL builds and both scripts compile with the real compiler.
+
+Still to do before release: see the faces, the aggression and the walk home in a Companions battle; then a PR to fork `dev` and a changelog entry.

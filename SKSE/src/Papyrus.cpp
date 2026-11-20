@@ -6,6 +6,7 @@
 
 #include "Papyrus.h"
 #include "FormIDString.h"
+#include "SoldierTemplates.h"
 #include "FactionLeaderNameMatch.h"
 #include "FactionPairValidation.h"
 #include "Utf8Truncate.h"
@@ -170,6 +171,7 @@ namespace IntelEngine::Papyrus {
 
     // Battle system forward declarations
     RE::BSFixedString GetFactionSoldierTemplate(RE::StaticFunctionTag*, RE::BSFixedString);
+    RE::TESObjectREFR* GetFactionHomeMarker(RE::StaticFunctionTag*, RE::BSFixedString);
     std::vector<RE::Actor*> SpawnBattleSoldiers(RE::StaticFunctionTag*, RE::BSFixedString, RE::TESObjectREFR*);
     RE::BSFixedString ExecuteFullBattleSpawn(RE::StaticFunctionTag*, RE::BSFixedString, RE::Actor*, float, RE::TESObjectREFR*);
     RE::BSFixedString SpawnReinforcements(RE::StaticFunctionTag*, int, RE::Actor*, RE::TESObjectREFR*);
@@ -557,6 +559,7 @@ namespace IntelEngine::Papyrus {
 
         // Battle System Functions
         a_vm->RegisterFunction("GetFactionSoldierTemplate", SCRIPT_NAME, GetFactionSoldierTemplate); ++count;
+        a_vm->RegisterFunction("GetFactionHomeMarker", SCRIPT_NAME, GetFactionHomeMarker); ++count;
         a_vm->RegisterFunction("SpawnBattleSoldiers", SCRIPT_NAME, SpawnBattleSoldiers); ++count;
         a_vm->RegisterFunction("ExecuteFullBattleSpawn", SCRIPT_NAME, ExecuteFullBattleSpawn); ++count;
         a_vm->RegisterFunction("SpawnReinforcements", SCRIPT_NAME, SpawnReinforcements); ++count;
@@ -4647,6 +4650,22 @@ namespace IntelEngine::Papyrus {
 
     RE::BSFixedString GetFactionSoldierTemplate(RE::StaticFunctionTag*, RE::BSFixedString factionId) {
         return RE::BSFixedString(FactionPolitics::GetSingleton()->GetSoldierTemplate(factionId.c_str()));
+    }
+
+    // The reference a faction's home_marker names ("0x0BC0BF", "Skyrim.esm|0x0BC0BF"): None when unset or not found.
+    RE::TESObjectREFR* GetFactionHomeMarker(RE::StaticFunctionTag*, RE::BSFixedString factionId) {
+        const auto text = FactionPolitics::GetSingleton()->GetHomeMarker(factionId.c_str());
+        SoldierTemplates::Ref ref;
+        if (text.empty() || !SoldierTemplates::ParseRef(text, ref)) return nullptr;
+        RE::TESForm* form = nullptr;
+        if (ref.plugin.empty()) {
+            form = RE::TESForm::LookupByID(ref.formId);
+        } else if (auto* data = RE::TESDataHandler::GetSingleton()) {
+            form = data->LookupForm(ref.formId, ref.plugin);
+        }
+        auto* marker = form ? form->AsReference() : nullptr;
+        if (!marker) logger::warn("home_marker '{}' of {} is not a reference", text, factionId.c_str());
+        return marker;
     }
 
     // factionIdWithCount format: "FactionId:Count" (e.g., "StormcloakFaction:7")
