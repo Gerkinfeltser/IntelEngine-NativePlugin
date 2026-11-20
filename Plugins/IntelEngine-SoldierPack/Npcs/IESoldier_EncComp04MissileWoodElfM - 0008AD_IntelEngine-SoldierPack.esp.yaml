@@ -67,7 +67,7 @@ Items:
     Item: 10E0DD:Skyrim.esm
     Count: 1
 AIData:
-  Aggression: VeryAggressive
+  Aggression: Aggressive
   Confidence: Foolhardy
   EnergyLevel: 50
   Assistance: HelpsFriendsAndAllies
