@@ -20,6 +20,18 @@ if(MSVC)
     set(CMAKE_CXX_FLAGS_RELEASE "/Od /Ob0 /DNDEBUG" CACHE STRING "MSVC Release flags" FORCE)
 endif()
 
+# Optional compile cache. Put ccache on PATH or pass -DINTELENGINE_CCACHE=<path to ccache.exe>.
+# Set before CommonLib is fetched so its targets are cached too. Needs a Ninja or Makefile generator.
+# The keys match SkyrimNet's cmake/ccache.cmake: compiler_check hashes cl's banner, so a hit stored
+# under another UI language or code page never replays /showIncludes lines ninja cannot parse.
+find_program(INTELENGINE_CCACHE ccache)
+if(INTELENGINE_CCACHE)
+    set(_intelengine_ccache "${INTELENGINE_CCACHE}" "sloppiness=time_macros,locale,pch_defines" "compiler_check=%compiler%")
+    set(CMAKE_CXX_COMPILER_LAUNCHER ${_intelengine_ccache})
+    set(CMAKE_C_COMPILER_LAUNCHER ${_intelengine_ccache})
+    message(STATUS "ccache: ${INTELENGINE_CCACHE}")
+endif()
+
 # =============================================================================
 # Dependencies
 # =============================================================================
